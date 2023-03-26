@@ -1,17 +1,18 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 type Props = {
   label: string;
   type: string;
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  icon: ReactNode;
 };
 
-function Input({ label, type, placeholder, onChange }: Props) {
+function Input({ label, type, placeholder, onChange, icon }: Props) {
   return (
     <div className="field">
       <label className="label has-text-light">{label}</label>
-      <div className="control">
+      <div className="control has-icons-left">
         <input
           className="input is-primary has-background-dark has-text-light"
           type={type}
@@ -19,10 +20,7 @@ function Input({ label, type, placeholder, onChange }: Props) {
           onChange={onChange}
         />
         <span className="icon is-small is-left">
-          <i className="fas fa-envelope"></i>
-        </span>
-        <span className="icon is-small is-right">
-          <i className="fas fa-check"></i>
+          {icon}
         </span>
       </div>
     </div>
