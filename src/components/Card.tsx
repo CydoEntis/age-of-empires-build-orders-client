@@ -5,7 +5,7 @@ type Props = {}
 
 function Card({}: Props) {
   return (
-    <div className="card has-background-dark has-text-light">
+    <div className="card has-background-blue has-text-light">
     <div className="card-image ">
       <figure className="image is-2by1">
         <img src={EnglishFlag} alt="" />

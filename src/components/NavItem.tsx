@@ -8,7 +8,7 @@ type Props = {
 
 function NavItem({ to, text }: Props) {
   return (
-    <NavLink className="is-primary navbar-item has-text-light is-capitalized" to={to}>{text}</NavLink>
+    <NavLink className="has-text-warning navbar-item has-text-light is-capitalized" to={to}>{text}</NavLink>
   )
 }
 

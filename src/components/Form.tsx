@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "./Input";
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import Button from "./Button";
 type Props = {};
 
 function Form({}: Props) {
@@ -11,12 +12,8 @@ function Form({}: Props) {
       <Input label="Password" type="password" placeholder="password" onChange={() => {}} icon={<FaLock />}/>
 
       <div className="field is-grouped">
-        <div className="control">
-          <button className="button is-link">Submit</button>
-        </div>
-        <div className="control">
-          <button className="button is-link is-light">Cancel</button>
-        </div>
+        <Button className="is-primary"text="submit" onClick={() => {}}/>
+        <Button className="is-danger"text="clear" onClick={() => {}}/>
       </div>
     </form>
   );

@@ -14,7 +14,7 @@ function Input({ label, type, placeholder, onChange, icon }: Props) {
       <label className="label has-text-light">{label}</label>
       <div className="control has-icons-left">
         <input
-          className="input is-primary has-background-dark has-text-light"
+          className="input has-text-light"
           type={type}
           placeholder={placeholder}
           onChange={onChange}
