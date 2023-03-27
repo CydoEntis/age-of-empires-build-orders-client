@@ -1,18 +1,19 @@
-import React from 'react'
-import Form from '../components/Form'
-import RegisterForm from '../features/RegisterForm'
+import Grid from "@mui/material/Grid";
+import AuthImage from "../features/auth/AuthImage";
+import AuthWrapper from "../features/auth/AuthWrapper";
+import RegisterForm from "../features/auth/RegisterForm";
 
-type Props = {}
+type Props = {};
 
 function register({}: Props) {
+  const handleSubmit = () => {};
+
   return (
-    <>
-    {/* <div className="hero is-fullheight"></div> */}
-    <div className="bg hero-body ">
-        <RegisterForm />
-    </div>
-    </>
-  )
+    <AuthWrapper>
+      <AuthImage />
+      <RegisterForm />
+    </AuthWrapper>
+  );
 }
 
-export default register
+export default register;

@@ -19,17 +19,21 @@ $warning-light: #ffe9b3;
 $cyan: #979245; 
 $grey-darker: #21293b;
 
+main {
+    // background: url("https://images.alphacoders.com/116/1165661.png")
+}
 // .bg {
 //     background-image: url('https://static.vecteezy.com/system/resources/previews/002/859/091/original/world-map-background-in-navy-blue-and-gold-free-vector.jpg');
 //     background-size: cover;
 //     background-position: 550px, 5%;
 // }
 
-.form {
+.bg {
     background-image: url('https://static.vecteezy.com/system/resources/previews/002/859/091/original/world-map-background-in-navy-blue-and-gold-free-vector.jpg');
-    position: relative;
-    background-position: 0px -400px;
-    z-index: 99;
+    background-size: cover;
+    background-position: center center;    
+    // background-position: 0px -400px;
+    // z-index: 99;
     // background-image: url("https://i.pinimg.com/236x/57/e7/27/57e727a4838896ecf7f8f6dd0fb00af7.jpg");
     // background-size: cover;
 }

@@ -1,15 +1,18 @@
-import React from 'react'
-import Form from '../components/Form'
-import LoginForm from '../features/LoginForm'
+import React from "react";
+import Form from "../components/Form";
+import AuthImage from "../features/auth/AuthImage";
+import AuthWrapper from "../features/auth/AuthWrapper";
+import LoginForm from "../features/auth/LoginForm";
 
-type Props = {}
+type Props = {};
 
 function login({}: Props) {
   return (
-    <div className="container">
-        <LoginForm />
-    </div>
-  )
+    <AuthWrapper>
+      <AuthImage />
+      <LoginForm />
+    </AuthWrapper>
+  );
 }
 
-export default login
+export default login;

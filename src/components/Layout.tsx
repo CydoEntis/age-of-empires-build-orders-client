@@ -1,18 +1,19 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Navbar from './Navbar'
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navigation from "../features/navigation/Navigation";
+import Navbar from "./Navbar";
 
-type Props = {}
+type Props = {};
 
 function Layout({}: Props) {
   return (
-    <div className="has-background-primary-dark">
-        <Navbar />
-        <main className="hero is-fullheight-with-navbar">
-            <Outlet />
-        </main>
-    </div>
-  )
+    <>
+      <Navigation />
+      <main className="">
+        <Outlet />
+      </main>
+    </>
+  );
 }
 
-export default Layout
+export default Layout;
