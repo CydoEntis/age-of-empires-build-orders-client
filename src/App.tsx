@@ -7,8 +7,7 @@ import Form from "./components/Form";
 
 function App() {
   return (
-    <div className="App has-background-primary-dark ">
-      <Navbar />
+    <div className="App">
       <div className="container p-6">
         <div className="columns is-variable is-8 is-flex-wrap-wrap">
           <div className="column is-3">
@@ -36,7 +35,6 @@ function App() {
             <Card />
           </div>
         </div>
-        <Form />
       </div>
     </div>
   );

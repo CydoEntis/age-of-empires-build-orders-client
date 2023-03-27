@@ -14,5 +14,54 @@ $input-hover-border-color: #ffdf91;
 $input-icon-color: #fff1cc;
 $input-icon-active-color: #ffdf91;
 $card-background-color: #323E59;
+$card-background-color: #323E59;
+$warning-light: #ffe9b3;
+$cyan: #979245; 
+$grey-darker: #21293b;
+
+// .bg {
+//     background-image: url('https://static.vecteezy.com/system/resources/previews/002/859/091/original/world-map-background-in-navy-blue-and-gold-free-vector.jpg');
+//     background-size: cover;
+//     background-position: 550px, 5%;
+// }
+
+.form {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/002/859/091/original/world-map-background-in-navy-blue-and-gold-free-vector.jpg');
+    position: relative;
+    background-position: 0px -400px;
+    z-index: 99;
+    // background-image: url("https://i.pinimg.com/236x/57/e7/27/57e727a4838896ecf7f8f6dd0fb00af7.jpg");
+    // background-size: cover;
+}
+
+.test {
+    // background-image: url("https://images.alphacoders.com/116/1165661.png");
+    // background-image: url("https://img.freepik.com/free-vector/vector-damask-seamless-pattern-background-classical-luxury-old-fashioned-damask-ornament-royal-victorian-seamless-texture-wallpapers-textile-wrapping-exquisite-floral-baroque-template_1217-611.jpg?w=2000");
+    background-image: url("https://www.ageofempires.com/wp-content/themes/ageOfEmpires/dist/images/ui/textile-30c.webp");
+    background-size:contain;
+    opacity: .1;
+    z-index: 1;
+}
+
+.overlay {
+    // z-index: 99;
+    opacity: .85;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    border: 1px solid gold;
+    // background-image: url('https://static.vecteezy.com/system/resources/previews/002/859/091/original/world-map-background-in-navy-blue-and-gold-free-vector.jpg');
+    background: rgb(0, 0, 0);
+    // opacity: .025;
+    // background: radial-gradient(circle, rgb(0, 0, 0) 5%, rgb(23, 26, 44) 100%);
+    // background: black;
+    // background-image: url('https://static.vecteezy.com/system/resources/previews/002/859/091/original/world-map-background-in-navy-blue-and-gold-free-vector.jpg');
+    // background-image: url("https://img.freepik.com/free-vector/vector-damask-seamless-pattern-background-classical-luxury-old-fashioned-damask-ornament-royal-victorian-seamless-texture-wallpapers-textile-wrapping-exquisite-floral-baroque-template_1217-611.jpg?w=2000");
+}
 
 @import "../node_modules/bulma/bulma.sass";
