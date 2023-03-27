@@ -27,7 +27,6 @@ function AuthWrapper({ children }: Props) {
       <Grid item xs={6} sx={{ display: "flex" }}>
         {children}
       </Grid>
-      {/* <CssBaseline /> */}
     </Grid>
   );
 }
