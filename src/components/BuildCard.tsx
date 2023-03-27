@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import React from "react";
 import EnglishFlag from "../assets/english.png";
 
 type Props = {};

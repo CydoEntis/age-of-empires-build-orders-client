@@ -1,9 +1,6 @@
 import "./App.css";
 
 import "./index.scss";
-import Card from "./components/BuildCard";
-import Navbar from "./components/Navbar";
-import Form from "./components/Form";
 import BuildCard from "./components/BuildCard";
 import { Container, Grid, Stack } from "@mui/material";
 import { Box } from "@mui/material";

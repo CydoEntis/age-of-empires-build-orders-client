@@ -1,7 +1,5 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 import Navigation from "../features/navigation/Navigation";
-import Navbar from "./Navbar";
 
 type Props = {};
 
