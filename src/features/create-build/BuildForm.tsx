@@ -11,11 +11,12 @@ import {
   Stack,
   CssBaseline,
   Paper,
+  Grid,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BuildStep from "./BuildStep";
 
 type Props = {};
@@ -133,15 +134,20 @@ function BuildForm({}: Props) {
     );
   }
 
+  useEffect(() => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [steps]);
+
   return (
     <Box
       sx={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle, rgba(28,40,69,1) 25%, rgba(14,16,25,1) 64%, rgba(6,15,38,1) 96%)",
+        background: "#F0F2F6",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
       }}
       p={10}
@@ -149,10 +155,14 @@ function BuildForm({}: Props) {
       <Box
         component="form"
         width={3 / 5}
-        sx={{ background: "#35425F", maxHeight: "1200px", borderRadius: ".8rem" }}
+        sx={{
+          background: "#FEFEFF",
+          maxHeight: "1200px",
+          borderRadius: ".8rem",
+        }}
         p={5}
       >
-        <Typography variant="h3" color="white">Create A New Build</Typography>
+        <Typography variant="h3">Create A New Build</Typography>
         <TextField
           margin="normal"
           fullWidth
@@ -161,15 +171,6 @@ function BuildForm({}: Props) {
           name="buildName"
           variant="outlined"
           autoFocus
-          InputLabelProps={{ style: { color: "white" } }}
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
           onChange={(e) => console.log(e.target.value)}
         />
         <TextField
@@ -181,15 +182,6 @@ function BuildForm({}: Props) {
           label="Description"
           name="description"
           variant="outlined"
-          InputLabelProps={{ style: { color: "white" } }}
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
           onChange={(e) => console.log(e.target.value)}
         />
         <Stack
@@ -208,15 +200,6 @@ function BuildForm({}: Props) {
             name=""
             variant="outlined"
             autoFocus
-            InputLabelProps={{ style: { color: "white" } }}
-            sx={{
-              backgroundColor: "#232A3D",
-              border: "2px solid grey",
-              borderRadius: ".4rem",
-              color: "white",
-              input: { color: "white" },
-              label: { color: "white" },
-            }}
             onChange={(e) => console.log(e.target.value)}
           >
             {civilizations.map((option) => (
@@ -234,15 +217,6 @@ function BuildForm({}: Props) {
             name="difficulty"
             variant="outlined"
             autoFocus
-            InputLabelProps={{ style: { color: "white" } }}
-            sx={{
-              backgroundColor: "#232A3D",
-              border: "2px solid grey",
-              borderRadius: ".4rem",
-              color: "white",
-              input: { color: "white" },
-              label: { color: "white" },
-            }}
             onChange={(e) => console.log(e.target.value)}
           >
             {difficulties.map((option) => (
@@ -268,15 +242,6 @@ function BuildForm({}: Props) {
             name="mapType"
             variant="outlined"
             autoFocus
-            InputLabelProps={{ style: { color: "white" } }}
-            sx={{
-              backgroundColor: "#232A3D",
-              border: "2px solid grey",
-              borderRadius: ".4rem",
-              color: "white",
-              input: { color: "white" },
-              label: { color: "white" },
-            }}
             onChange={(e) => console.log(e.target.value)}
           >
             {mapTypes.map((option) => (
@@ -294,15 +259,6 @@ function BuildForm({}: Props) {
             name="buildType"
             variant="outlined"
             autoFocus
-            InputLabelProps={{ style: { color: "white" } }}
-            sx={{
-              backgroundColor: "#232A3D",
-              border: "2px solid grey",
-              borderRadius: ".4rem",
-              color: "white",
-              input: { color: "white" },
-              label: { color: "white" },
-            }}
             onChange={(e) => console.log(e.target.value)}
           >
             {buildTypes.map((option) => (
@@ -312,26 +268,38 @@ function BuildForm({}: Props) {
             ))}
           </TextField>
         </Stack>
-        <Typography variant="h6" mt={3} color="white">
+        <Typography variant="h6" mt={3}>
           Add A Step
         </Typography>
-
-        <Stack spacing={2} sx={{ overflowY: "scroll", maxHeight: "300px" }}>
-          {steps}
-        </Stack>
+      </Box>
+      <Stack spacing={2} width={3 / 5}>
+        {steps}
+      </Stack>
+      <Box width={3 / 5}>
         <Button
           type="button"
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            display: "block",
+            mt: 1,
+            mb: 1,
+          }}
           onClick={handleAddStep}
         >
           Add a Step
         </Button>
         <Button
           type="submit"
-          fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            display: "block",
+            mt: 1,
+            mb: 1,
+          }}
         >
           Create Build
         </Button>

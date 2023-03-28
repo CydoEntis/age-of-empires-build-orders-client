@@ -3,26 +3,28 @@ import { MobileTimePicker } from "@mui/x-date-pickers";
 import React from "react";
 
 type Props = {
-    stepNumber: number;
+  stepNumber: number;
 };
 
-function BuildStep({stepNumber}: Props) {
+function BuildStep({ stepNumber }: Props) {
   return (
-    <Box p={2} sx={{border: "1px solid lightgrey", borderRadius: ".4rem"}}>
-        <Typography variant="h6" color={"white"}>Step {stepNumber}</Typography>
+    <Box
+      component="form"
+      sx={{
+        background: "#FEFEFF",
+        maxHeight: "1200px",
+        borderRadius: ".8rem",
+      }}
+      my={2}
+      p={5}
+    >
+      <Typography variant="h6">Step {stepNumber}</Typography>
       <Stack direction="row" spacing={5} py={2}>
         <MobileTimePicker
           label={"Minutes : Seconds"}
           views={["minutes", "seconds"]}
           format="mm:ss"
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
+          sx={{}}
         />
         <TextField
           fullWidth
@@ -31,15 +33,7 @@ function BuildStep({stepNumber}: Props) {
           name="instruction"
           variant="outlined"
           autoFocus
-          InputLabelProps={{ style: { color: "white" } }}
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
+          sx={{}}
           onChange={(e) => console.log(e.target.value)}
         />
       </Stack>
@@ -52,14 +46,7 @@ function BuildStep({stepNumber}: Props) {
             shrink: true,
           }}
           variant="outlined"
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
+          sx={{}}
           onChange={(e) => console.log(e.target.value)}
         />
         <TextField
@@ -70,14 +57,7 @@ function BuildStep({stepNumber}: Props) {
             shrink: true,
           }}
           variant="outlined"
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
+          sx={{}}
           onChange={(e) => console.log(e.target.value)}
         />
         <TextField
@@ -88,14 +68,7 @@ function BuildStep({stepNumber}: Props) {
             shrink: true,
           }}
           variant="outlined"
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
+          sx={{}}
           onChange={(e) => console.log(e.target.value)}
         />
         <TextField
@@ -106,14 +79,7 @@ function BuildStep({stepNumber}: Props) {
             shrink: true,
           }}
           variant="outlined"
-          sx={{
-            backgroundColor: "#232A3D",
-            border: "2px solid grey",
-            borderRadius: ".4rem",
-            color: "white",
-            input: { color: "white" },
-            label: { color: "white" },
-          }}
+          sx={{}}
           onChange={(e) => console.log(e.target.value)}
         />
       </Stack>
