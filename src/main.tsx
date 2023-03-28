@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider} from "react-router-dom";
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import BuildForm from './features/build-forms/BuildForm';
+import BuildForm from './features/create-build/BuildForm';
 
 const router = createBrowserRouter([
   {

@@ -2,12 +2,15 @@ import {
   Typography,
   TextField,
   Button,
-  Grid,
-  Link,
   MenuItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import React from "react";
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 
 type Props = {};
 
@@ -122,7 +125,7 @@ function BuildForm({}: Props) {
       }}
       p={10}
     >
-      <Box component="form">
+      <Box component="form" width={3 / 5}>
         <Typography variant="h3">Create A New Build</Typography>
         <TextField
           margin="normal"
@@ -227,6 +230,53 @@ function BuildForm({}: Props) {
             </MenuItem>
           ))}
         </TextField>
+        <TextField
+          margin="normal"
+          select
+          fullWidth
+          id="buildType"
+          label="Select a Build Type"
+          name="buildType"
+          variant="standard"
+          autoFocus
+          color="primary"
+          sx={{ backgroundColor: "white" }}
+          onChange={(e) => console.log(e.target.value)}
+        >
+          {buildTypes.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <Typography variant="h6" mt={3}>
+          Add A Step
+        </Typography>
+        <TableContainer>
+          <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+            <TableBody>
+              <TableRow component="th" scope="row">
+                <TableCell>Time</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Food</TableCell>
+                <TableCell>Wood</TableCell>
+                <TableCell>Gold</TableCell>
+                <TableCell>Stone</TableCell>
+              </TableRow>
+              <TableRow component="th" scope="row">
+                <TableCell>
+                  <TimePicker label="Basic time picker" />
+
+                </TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Food</TableCell>
+                <TableCell>Wood</TableCell>
+                <TableCell>Gold</TableCell>
+                <TableCell>Stone</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
         <Button
           type="submit"
           fullWidth
