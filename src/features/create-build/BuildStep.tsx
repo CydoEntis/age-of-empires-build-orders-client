@@ -9,9 +9,10 @@ type Props = {
 function BuildStep({ stepNumber }: Props) {
   return (
     <Box
-      component="form"
+      width={3 / 5}
+      component={Paper}
       sx={{
-        background: "#FEFEFF",
+        // background: "#FEFEFF",
         maxHeight: "1200px",
         borderRadius: ".8rem",
       }}

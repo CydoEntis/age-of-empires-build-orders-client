@@ -7,12 +7,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
+import { Paper } from "@mui/material";
 
 type Props = {};
 
 function RegisterForm({}: Props) {
   return (
-    <Grid item md={6} sx={{ background: "white" }}>
+    <Grid component={Paper} item md={6} >
       <Box
         sx={{
           display: "flex",
@@ -22,7 +23,7 @@ function RegisterForm({}: Props) {
         }}
         p={10}
       >
-        <Box component="form">
+        <Box>
           <Typography variant="h3">Create an Account</Typography>
           <Typography>Start creating your build orders</Typography>
           <TextField
@@ -33,8 +34,6 @@ function RegisterForm({}: Props) {
             name="username"
             variant="standard"
             autoFocus
-            color="primary"
-            sx={{ backgroundColor: "white" }}
             onChange={(e) => console.log(e.target.value)}
           />
           <TextField
@@ -45,8 +44,6 @@ function RegisterForm({}: Props) {
             name="email"
             variant="standard"
             autoFocus
-            color="primary"
-            sx={{ backgroundColor: "white" }}
             onChange={(e) => console.log(e.target.value)}
           />
           <TextField
@@ -57,8 +54,6 @@ function RegisterForm({}: Props) {
             name="password"
             variant="standard"
             autoFocus
-            color="primary"
-            sx={{ backgroundColor: "white" }}
             onChange={(e) => console.log(e.target.value)}
           />
           <TextField
@@ -69,8 +64,6 @@ function RegisterForm({}: Props) {
             name="comfirmPassword"
             variant="standard"
             autoFocus
-            color="primary"
-            sx={{ backgroundColor: "white" }}
             onChange={(e) => console.log(e.target.value)}
           />
           <Button

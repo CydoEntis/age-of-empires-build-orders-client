@@ -20,8 +20,6 @@ function AuthWrapper({ children }: Props) {
       justifyContent="center"
       sx={{
         minHeight: "100vh",
-        background:
-          "radial-gradient(circle, rgba(28,40,69,1) 25%, rgba(14,16,25,1) 64%, rgba(6,15,38,1) 96%)",
       }}
     >
       <Grid item xs={6} sx={{ display: "flex" }}>

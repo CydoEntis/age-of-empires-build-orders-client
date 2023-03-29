@@ -9,6 +9,12 @@ import Register from "./pages/Register";
 import BuildForm from "./features/create-build/BuildForm";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import {
+  createTheme,
+  CssBaseline,
+  PaletteMode,
+  ThemeProvider,
+} from "@mui/material";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +34,7 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/create",
+        path: "/build/create",
         element: <BuildForm />,
       },
       {
@@ -38,10 +44,81 @@ const router = createBrowserRouter([
   },
 ]);
 
+const getDesignTokens = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === "light"
+      ? {
+          primary: {
+            main: "#275271",
+            dark: "#275271",
+          },
+          secondary: {
+            main: "#fff"
+          },
+          background: {
+            default: "#f1f3f6",
+            paper: "#ffffff",
+            contrastText: "#333",
+            light: "#fff"
+          },
+        }
+      : {
+          primary: {
+            main: "#CFB983",
+            dark: "#ab986a",
+          },
+          background: {
+            // default: '#191D2B',
+            // default: '#1F2538',
+            // default: '#0E1019', Chosen
+            // default: "#0f111b",
+            default: "#10101B",
+            // paper: '#232A3F',
+            // paper: '#2A354D',
+            // paper: '#161927', Chosen
+            paper: "#191c2b",
+            // paper: "#275271",
+          },
+        }),
+  },
+});
+
+const theme = createTheme(getDesignTokens("dark"));
+
+// const defaultTheme = createTheme({
+//   palette: {
+//     mode: "dark",
+//     primary: {
+//       main: "#CFB983",
+//       dark: "#ab986a",
+//     },
+//     background: {
+//       // default: '#191D2B',
+//       // default: '#1F2538',
+//       // default: '#0E1019', Chosen
+//       default: "#0f111b",
+//       // paper: '#232A3F',
+//       // paper: '#2A354D',
+//       // paper: '#161927', Chosen
+//       paper: "#191c2b",
+//     },
+//   },
+// });
+
+// const darkTheme = createTheme({
+//   palette: {
+//     mode: "dark",
+//   },
+// });
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </LocalizationProvider>
   </React.StrictMode>
 );

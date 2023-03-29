@@ -145,7 +145,7 @@ function BuildForm({}: Props) {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "#F0F2F6",
+        backgroundColor: "primary",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -153,10 +153,10 @@ function BuildForm({}: Props) {
       p={10}
     >
       <Box
-        component="form"
+        component={Paper}
         width={3 / 5}
         sx={{
-          background: "#FEFEFF",
+          backgroundColor: "secondary",
           maxHeight: "1200px",
           borderRadius: ".8rem",
         }}
@@ -272,9 +272,7 @@ function BuildForm({}: Props) {
           Add A Step
         </Typography>
       </Box>
-      <Stack spacing={2} width={3 / 5}>
-        {steps}
-      </Stack>
+      {steps}
       <Box width={3 / 5}>
         <Button
           type="button"

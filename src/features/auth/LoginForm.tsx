@@ -1,10 +1,18 @@
-import { Grid, Box, Typography, TextField, Button, Link } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Link,
+  Paper,
+} from "@mui/material";
 
 type Props = {};
 
 function LoginForm({}: Props) {
   return (
-    <Grid item md={6} sx={{ background: "white" }}>
+    <Grid component={Paper} item md={6}>
       <Box
         sx={{
           display: "flex",
@@ -26,7 +34,6 @@ function LoginForm({}: Props) {
             variant="standard"
             autoFocus
             color="primary"
-            sx={{ backgroundColor: "white" }}
             onChange={(e) => console.log(e.target.value)}
           />
           <TextField
@@ -38,7 +45,6 @@ function LoginForm({}: Props) {
             variant="standard"
             autoFocus
             color="primary"
-            sx={{ backgroundColor: "white" }}
             onChange={(e) => console.log(e.target.value)}
           />
           <Button

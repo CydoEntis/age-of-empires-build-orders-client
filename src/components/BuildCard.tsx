@@ -16,13 +16,9 @@ type Props = {};
 function BuildCard({}: Props) {
   return (
     <Grid item md={2}>
-      <Card sx={{ background: "#323F58", color: "white" }}>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={EnglishFlag}
-        />
+      {/* sx={{ background: "white", color: "#333" }} */}
+      <Card elevation={8} >
+        <CardMedia component="img" height="140" image={EnglishFlag} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             White Tower Rush
