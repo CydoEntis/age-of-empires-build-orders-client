@@ -15,6 +15,8 @@ import {
   PaletteMode,
   ThemeProvider,
 } from "@mui/material";
+import Build from "./pages/Build";
+
 
 const router = createBrowserRouter([
   {
@@ -22,23 +24,24 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/register",
+        path: "register",
         element: <Register />,
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/",
+        path: "",
         element: <App />,
       },
       {
-        path: "/build/create",
+        path: "build/create",
         element: <BuildForm />,
       },
       {
-        path: "builds/:buildId",
+        path: "build/:buildId",
+        element: <Build />
       },
     ],
   },
@@ -49,8 +52,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
     mode,
     ...(mode === "light"
       ? {
-          primary: {
-            main: "#275271",
+          primary: {            main: "#275271",
             dark: "#275271",
           },
           secondary: {
@@ -65,8 +67,10 @@ const getDesignTokens = (mode: PaletteMode) => ({
         }
       : {
           primary: {
-            main: "#CFB983",
-            dark: "#ab986a",
+            // main: "#CFB983",
+            // dark: "#ab986a",
+            main: "#e9c56a",
+            dark: "#c4a24d",
           },
           background: {
             // default: '#191D2B',
