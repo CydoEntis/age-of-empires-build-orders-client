@@ -17,10 +17,15 @@ function BuildCard({}: Props) {
   return (
     <Grid item md={2}>
       {/* sx={{ background: "white", color: "#333" }} */}
-      <Card elevation={8} >
+      <Card elevation={8}>
         <CardMedia component="img" height="140" image={EnglishFlag} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography
+            
+            gutterBottom
+            variant="h5"
+            component="div"
+          >
             White Tower Rush
           </Typography>
           <Typography variant="body2">
