@@ -15,17 +15,15 @@ import TableRow from "@mui/material/TableRow";
 import BuildSteps from "../features/builds/BuildSteps";
 type Props = {};
 
-
-
 function Build({}: Props) {
   return (
     // <Grid container sx={{ justifyContent: "center", border: "3px solid lime", width: "100vw"}} columns={{ xs: 1, sm: 1, }}>
-      <Container>
-        <StepCard />
-        <BuildSteps />
-      </Container>  
-      
-      
+    // <Container>
+    <Container maxWidth={"xl"}>
+      <StepCard />
+      <BuildSteps />
+    </Container>
+    // </Container>
   );
 }
 
