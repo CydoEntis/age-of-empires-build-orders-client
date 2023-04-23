@@ -6,15 +6,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import { Paper } from "@mui/material";
-import InputField from "../../components/InputField";
+import FormInput from "../../components/form/FormInput";
 
 import { useForm } from "react-hook-form";
-import { Register, registerUser } from "../../store/slices/authSlice";
+import { RegisterDetails, registerUser } from "../../store/slices/authSlice";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const defaultValues: Register = {
+const defaultValues: RegisterDetails = {
   email: "",
   username: "",
   password: "",
@@ -24,7 +24,7 @@ const defaultValues: Register = {
 function RegisterForm() {
   const dispatch = useAppDispatch();
 
-  const schema: ZodType<Register> = z
+  const schema: ZodType<RegisterDetails> = z
     .object({
       email: z.string().email(),
       username: z.string().min(3).max(20),
@@ -36,12 +36,12 @@ function RegisterForm() {
       path: ["confirmPassword"],
     });
 
-  const { handleSubmit, control } = useForm<Register>({
+  const { handleSubmit, control } = useForm<RegisterDetails>({
     defaultValues: defaultValues,
     resolver: zodResolver(schema),
   });
 
-  function onSubmit(data: Register) {
+  function onSubmit(data: RegisterDetails) {
     dispatch(registerUser(data));
   }
 
@@ -60,28 +60,28 @@ function RegisterForm() {
           <Typography variant="h3">Create an Account</Typography>
           <Typography>Start creating your build orders</Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <InputField
+            <FormInput
               id="email"
               label="Email"
               type="email"
               name="email"
               control={control}
             />
-            <InputField
+            <FormInput
               id="username"
               label="Username"
               type="text"
               name="username"
               control={control}
             />
-            <InputField
+            <FormInput
               id="password"
               label="Password"
               type="password"
               name="password"
               control={control}
             />
-            <InputField
+            <FormInput
               id="confirmPassword"
               label="Confrim Password"
               type="password"

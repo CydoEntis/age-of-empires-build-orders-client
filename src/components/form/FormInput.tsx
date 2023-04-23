@@ -10,7 +10,7 @@ type Props = {
   type: "text" | "password" | "email";
 };
 
-function InputField({ name, control, id, label, type }: Props) {
+function FormInput({ name, control, id, label, type }: Props) {
 
   return (
     <Controller
@@ -40,4 +40,4 @@ function InputField({ name, control, id, label, type }: Props) {
   );
 }
 
-export default InputField;
+export default FormInput;

@@ -1,16 +1,28 @@
-import {
-  Grid,
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Link,
-  Paper,
-} from "@mui/material";
+import { Grid, Box, Typography, Button, Link, Paper } from "@mui/material";
+import FormInput from "../../components/form/FormInput";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useForm } from "react-hook-form";
+import { LoginDetails, loginUser } from "../../store/slices/authSlice";
+import { redirect, useNavigate } from "react-router-dom";
 
-type Props = {};
+const defaultValues: LoginDetails = {
+  username: "",
+  password: "",
+};
+function LoginForm() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-function LoginForm({}: Props) {
+  const { handleSubmit, control } = useForm<LoginDetails>({
+    defaultValues: defaultValues,
+  });
+
+  function onSubmit(data: LoginDetails) {
+    dispatch(loginUser(data));
+    console.log("redirecting...")
+    navigate("/")
+  }
+
   return (
     <Grid component={Paper} item md={6}>
       <Box
@@ -22,39 +34,33 @@ function LoginForm({}: Props) {
         }}
         p={10}
       >
-        <Box component="form">
+        <Box>
           <Typography variant="h3">Log in</Typography>
           <Typography>Create or update your existing build orders!</Typography>
-          <TextField
-            margin="normal"
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            variant="standard"
-            autoFocus
-            color="primary"
-            onChange={(e) => console.log(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            fullWidth
-            id="password"
-            label="Password"
-            name="password"
-            variant="standard"
-            autoFocus
-            color="primary"
-            onChange={(e) => console.log(e.target.value)}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Log in
-          </Button>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormInput
+              id="username"
+              label="Username"
+              type="text"
+              name="username"
+              control={control}
+            />
+            <FormInput
+              id="password"
+              label="Password"
+              type="password"
+              name="password"
+              control={control}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Log in
+            </Button>
+          </form>
           <Grid container>
             <Grid item>
               <Link href="/register" variant="body2">

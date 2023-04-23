@@ -10,17 +10,17 @@ import axios from "axios";
 function App() {
   const [builds, setBuilds] = useState([]);
   
-  useEffect(() => {
-    async function allBuilds() {
-      const res = await axios("http://localhost:8080/api/v1/builds");
-      setBuilds(res.data);
-    }
+  // useEffect(() => {
+  //   async function allBuilds() {
+  //     const res = await axios("http://localhost:8080/api/v1/builds");
+  //     setBuilds(res.data);
+  //   }
 
-    allBuilds();
+  //   allBuilds();
 
-  }, []) 
+  // }, []) 
 
-  console.log(builds);
+  // console.log(builds);
 
   return (
 
