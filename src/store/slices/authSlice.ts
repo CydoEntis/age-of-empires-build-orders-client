@@ -24,6 +24,8 @@ export interface AuthState {
   errorMessage: string;
 }
 
+const api_endpoint = `${import.meta.env.VITE_ENDPOINT}`;
+
 const username = localStorage.getItem("user");
 const token = localStorage.getItem("token");
 
@@ -40,7 +42,7 @@ function saveUserDetailsToLocalStorage(username: string, token: string) {
 
 async function getCsrfTokenConfig() {
   try {
-    const res = await axios("http://localhost:8080/api/v1/auth/csrf");
+    const res = await axios(`${api_endpoint}/auth/csrf`);
     return {
       headers: {
         "X-CSRF-TOKEN": res.data.token,
@@ -58,7 +60,7 @@ export const registerUser = createAsyncThunk(
     try {
       console.log(registerDetails);
       const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
+        `${api_endpoint}/auth/register`,
         registerDetails
       );
 
@@ -78,7 +80,7 @@ export const loginUser = createAsyncThunk(
       let config = await getCsrfTokenConfig();
       console.log(config);
       const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/login",
+        `${api_endpoint}/auth/login`,
         loginDetails,
         config
       );

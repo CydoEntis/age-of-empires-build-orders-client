@@ -6,25 +6,21 @@ import { Container, Grid, Stack } from "@mui/material";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useAppDispatch, useAppSelector } from "./hooks/reduxHooks";
+import { getAllBuilds } from "./store/slices/buildSlice";
 
 function App() {
-  const [builds, setBuilds] = useState([]);
-  
-  // useEffect(() => {
-  //   async function allBuilds() {
-  //     const res = await axios("http://localhost:8080/api/v1/builds");
-  //     setBuilds(res.data);
-  //   }
+  const dispatch = useAppDispatch();
+  const builds = useAppSelector(state => state.builds.builds);
+  // const [builds, setBuilds] = useState([]);
 
-  //   allBuilds();
+  useEffect(() => {
+    dispatch(getAllBuilds());
+  }, []);
 
-  // }, []) 
-
-  // console.log(builds);
+  console.log(builds);
 
   return (
-
-
     <Box
       sx={{
         padding: "5rem",
@@ -33,13 +29,7 @@ function App() {
       }}
     >
       <Grid container spacing={2}>
-        <BuildCard />
-        <BuildCard />
-        <BuildCard />
-        <BuildCard />
-        <BuildCard />
-        <BuildCard />
-        <BuildCard />
+        {builds && builds.map(build => (<BuildCard key={build.id} name={build.name} description={build.description} civilization={build.civilization} difficulty={build.difficulty} mapType={build.mapType} buildType={build.buildType} creator={""} createdAt={""} updatedAt={""} />))}
       </Grid>
     </Box>
   );

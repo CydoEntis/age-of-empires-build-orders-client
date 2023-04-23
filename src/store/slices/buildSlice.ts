@@ -1,7 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export interface Build {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   civilization:
@@ -11,7 +12,7 @@ export interface Build {
     | "ENGLISH"
     | "FRENCH"
     | "HOLY_ROMAN_EMPIRE"
-    | "MAILAINS"
+    | "MALIANS"
     | "MONGOLS"
     | "OTTOMANS"
     | "RUS";
@@ -23,7 +24,7 @@ export interface Build {
     | "ECONOMIC"
     | "FAST_CASTLE"
     | "TIMING_ATTACK";
-  step: Step[];
+  // step: Step[];
   creator: string;
   createdAt: string;
   updatedAt: string;
@@ -43,16 +44,31 @@ export interface BuildsState {
   builds: Build[];
 }
 
+const apiEndpoint = `${import.meta.env.VITE_API_ENDPOINT}`;
+console.log(apiEndpoint)
+
 const initialState: BuildsState = {
   builds: [],
 };
-// TODO: add async thunks
 
+export const getAllBuilds = createAsyncThunk("/builds", async () => {
+  try {
+    const res = await axios(`${apiEndpoint}/builds`);
+    // console.log(res.data);
+    return res.data;
+  } catch (error: any) {
+    throw new Error();
+  }
+});
 const buildsSlice = createSlice({
   name: "builds",
   initialState,
   reducers: {},
-  extraReducers: function (builder) {},
+  extraReducers: function (builder) {
+    builder.addCase(getAllBuilds.fulfilled, (state, action) => {
+      state.builds = action.payload;
+    });
+  },
 });
 
 export const {} = buildsSlice.actions;
