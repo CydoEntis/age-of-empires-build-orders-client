@@ -18,6 +18,8 @@ import {
 } from "@mui/material";
 import Build from "./pages/Build";
 import DancingScript from "./assets/fonts/DancingScript-Regular.ttf";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
 
 const router = createBrowserRouter([
   {
@@ -98,7 +100,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
             paper: "#191c2b",
           },
           typography: {
-            fontFamily: ['Inter', 'sans-serif'].join(","),
+            fontFamily: ["Inter", "sans-serif"].join(","),
             fontSize: 14,
             fontWeightLight: 300,
             fontWeightRegular: 400,
@@ -160,12 +162,14 @@ const theme = createTheme(getDesignTokens("dark"));
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline>
-          <RouterProvider router={router} />
-        </CssBaseline>
-      </ThemeProvider>
-    </LocalizationProvider>
+    <Provider store={store}>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline>
+            <RouterProvider router={router} />
+          </CssBaseline>
+        </ThemeProvider>
+      </LocalizationProvider>
+    </Provider>
   </React.StrictMode>
 );
