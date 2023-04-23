@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { Register, registerUser } from "../../store/slices/authSlice";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { ZodType, z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const defaultValues: Register = {
   email: "",
@@ -22,10 +23,6 @@ const defaultValues: Register = {
 
 function RegisterForm() {
   const dispatch = useAppDispatch();
-
-  const { handleSubmit, control } = useForm<Register>({
-    defaultValues: defaultValues,
-  });
 
   const schema: ZodType<Register> = z
     .object({
@@ -38,6 +35,11 @@ function RegisterForm() {
       message: "Passwords do not match",
       path: ["confirmPassword"],
     });
+
+  const { handleSubmit, control } = useForm<Register>({
+    defaultValues: defaultValues,
+    resolver: zodResolver(schema),
+  });
 
   function onSubmit(data: Register) {
     dispatch(registerUser(data));
