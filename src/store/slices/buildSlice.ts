@@ -15,23 +15,28 @@ export interface Build {
     | "MALIANS"
     | "MONGOLS"
     | "OTTOMANS"
-    | "RUS";
-  difficulty: "EASY" | "MEDIUM" | "HARD";
-  mapType: "OPEN" | "CLOSED" | "HYBRID" | "WATER";
+    | "RUS"
+    | null;
+  difficulty: "EASY" | "MEDIUM" | "HARD" | null;
+  mapType: "OPEN" | "CLOSED" | "HYBRID" | "WATER" | null;
   buildType:
     | "CHEESE"
     | "DEFENSIVE"
     | "ECONOMIC"
     | "FAST_CASTLE"
-    | "TIMING_ATTACK";
-  // step: Step[];
-  creator: string;
+    | "TIMING_ATTACK"
+    | null;
+  createdBy: string;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface BuildWithSteps extends Build {
+  steps: Step[]
+}
+
 export interface Step {
-  id: string;
+  id?: string;
   time: string;
   description: string;
   food: number;
@@ -45,7 +50,7 @@ export interface BuildsState {
 }
 
 const apiEndpoint = `${import.meta.env.VITE_API_ENDPOINT}`;
-console.log(apiEndpoint)
+console.log(apiEndpoint);
 
 const initialState: BuildsState = {
   builds: [],

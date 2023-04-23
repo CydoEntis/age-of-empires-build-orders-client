@@ -66,6 +66,7 @@ function RegisterForm() {
               type="email"
               name="email"
               control={control}
+              variant="standard"
             />
             <FormInput
               id="username"
@@ -73,6 +74,7 @@ function RegisterForm() {
               type="text"
               name="username"
               control={control}
+              variant="standard"
             />
             <FormInput
               id="password"
@@ -80,6 +82,7 @@ function RegisterForm() {
               type="password"
               name="password"
               control={control}
+              variant="standard"
             />
             <FormInput
               id="confirmPassword"
@@ -87,6 +90,7 @@ function RegisterForm() {
               type="password"
               name="confirmPassword"
               control={control}
+              variant="standard"
             />
             <Button
               type="submit"

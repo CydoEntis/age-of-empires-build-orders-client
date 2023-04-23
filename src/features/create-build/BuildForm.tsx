@@ -3,23 +3,54 @@ import {
   TextField,
   Button,
   MenuItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Stack,
-  CssBaseline,
   Paper,
-  Grid,
+  Stack,
 } from "@mui/material";
 import Box from "@mui/material/Box";
-import { MobileTimePicker } from "@mui/x-date-pickers/MobileTimePicker";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { useEffect, useState } from "react";
 import BuildStep from "./BuildStep";
+import { ZodType, z } from "zod";
+import { Build, BuildWithSteps, Step } from "../../store/slices/buildSlice";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import FromDropdown from "../../components/form/FormDropdown";
+import FormInput from "../../components/form/FormInput";
 
 type Props = {};
+
+export enum Difficulty {
+  EASY = "EASY",
+  MEDIUM = "MEDIUM",
+  HARD = "HARD",
+}
+
+export enum Civilization {
+  ABBASID_DYNASTY = "ABBASID_DYNASTY",
+  CHINESE = "CHINESE",
+  DELHI_SULTANTATE = "DELHI_SULTANTE",
+  ENGLISH = "ENGLISH",
+  FRENCH = "FRENCH",
+  HOLY_ROMAN_EMPIRE = "HOLY_ROMAN_EMPIRE",
+  MALIANS = "MALIANS",
+  MONGOLS = "MONGOLS",
+  OTTOMAS = "OTTOMANS",
+  RUS = "RUS",
+}
+
+export enum MapType {
+  OPEN = "OPEN",
+  CLOSE = "CLOSED",
+  HYBRID = "HYBRID",
+  WATER = "WATER",
+}
+
+export enum BuildType {
+  CHEESE = "CHEESE",
+  DEFENSIVE = "DEFENSIVE",
+  ECONOMIC = "ECONOMIC",
+  FAST_CASTLE = "FAST_CASTLE",
+  TIMING_ATTACK = "TIMING_ATTACK",
+}
 
 const civilizations = [
   {
@@ -121,7 +152,27 @@ const buildTypes = [
   },
 ];
 
-interface IBuildStep {}
+const defaultBuildValues: BuildWithSteps = {
+  name: "",
+  description: "",
+  civilization: null,
+  difficulty: null,
+  mapType: null,
+  buildType: null,
+  createdBy: "",
+  createdAt: "",
+  updatedAt: "",
+  steps: [],
+};
+
+const defaultStepValues: Step = {
+  time: "",
+  description: "",
+  food: 0,
+  wood: 0,
+  gold: 0,
+  stone: 0,
+};
 
 function BuildForm({}: Props) {
   const [steps, setSteps] = useState([<BuildStep stepNumber={1} key={0} />]);
@@ -132,6 +183,43 @@ function BuildForm({}: Props) {
         <BuildStep stepNumber={steps.length + 1} key={steps.length} />
       )
     );
+  }
+
+  const buildSchema: ZodType<Build> = z.object({
+    name: z.string().min(5).max(20),
+    description: z.string().min(10).max(50),
+    civilization: z.nativeEnum(Civilization),
+    difficulty: z.nativeEnum(Difficulty),
+    mapType: z.nativeEnum(MapType),
+    buildType: z.nativeEnum(BuildType),
+    createdBy: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+  });
+
+  const stepSchema: ZodType<Step> = z.object({
+    time: z.string().min(0),
+    description: z.string().min(10).max(50),
+    food: z.number().min(0).max(200),
+    wood: z.number().min(0).max(200),
+    gold: z.number().min(0).max(200),
+    stone: z.number().min(0).max(200),
+  });
+
+  const { handleSubmit: handleBuildSubmit, control: buildControl } =
+    useForm<BuildWithSteps>({
+      defaultValues: defaultBuildValues,
+      resolver: zodResolver(buildSchema),
+    });
+
+  const { handleSubmit: handleStepSubmit, control: stepControl } =
+    useForm<Step>({
+      defaultValues: defaultStepValues,
+      resolver: zodResolver(stepSchema),
+    });
+
+  function onSubmit(data: Build) {
+    // dispatch(registerUser(data));
   }
 
   useEffect(() => {
@@ -163,16 +251,15 @@ function BuildForm({}: Props) {
         p={5}
       >
         <Typography variant="h3">Create A New Build</Typography>
-        <TextField
-          margin="normal"
-          fullWidth
+        <FormInput
           id="buildName"
+          name="name"
           label="Build Name"
-          name="buildName"
+          control={buildControl}
+          type="text"
           variant="outlined"
-          autoFocus
-          onChange={(e) => console.log(e.target.value)}
         />
+
         <TextField
           multiline
           rows={4}
@@ -191,40 +278,20 @@ function BuildForm({}: Props) {
           justifyContent="center"
           py={3}
         >
-          <TextField
-            select
+          <FromDropdown
+            name="civilization"
+            control={buildControl}
             defaultValue="ABBASID_DYNASTY"
-            fullWidth
-            id="civilization"
             label="Select a Civilization"
-            name=""
-            variant="outlined"
-            autoFocus
-            onChange={(e) => console.log(e.target.value)}
-          >
-            {civilizations.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            select
-            defaultValue="EASY"
-            fullWidth
-            id="difficulty"
-            label="Select a Difficulty"
+            options={civilizations}
+          />
+          <FromDropdown
             name="difficulty"
-            variant="outlined"
-            autoFocus
-            onChange={(e) => console.log(e.target.value)}
-          >
-            {difficulties.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+            control={buildControl}
+            defaultValue="EASY"
+            label="Select a Difficulty"
+            options={difficulties}
+          />
         </Stack>
         <Stack
           direction="row"
@@ -233,40 +300,20 @@ function BuildForm({}: Props) {
           justifyContent="center"
           py={3}
         >
-          <TextField
-            select
-            defaultValue="OPEN"
-            fullWidth
-            id="mapType"
-            label="Select a Map Type"
+          <FromDropdown
             name="mapType"
-            variant="outlined"
-            autoFocus
-            onChange={(e) => console.log(e.target.value)}
-          >
-            {mapTypes.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-          <TextField
-            select
-            defaultValue="TIMING_ATTACK"
-            fullWidth
-            id="buildType"
-            label="Select a Build Type"
+            control={buildControl}
+            defaultValue="OPEN"
+            label="Select a Map Type"
+            options={mapTypes}
+          />
+          <FromDropdown
             name="buildType"
-            variant="outlined"
-            autoFocus
-            onChange={(e) => console.log(e.target.value)}
-          >
-            {buildTypes.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+            control={buildControl}
+            defaultValue="ECONOMIC"
+            label="Select a Build Type"
+            options={buildTypes}
+          />
         </Stack>
         <Typography variant="h6" mt={3}>
           Add A Step

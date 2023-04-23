@@ -8,10 +8,10 @@ type Props = {
   label: string;
   control: any;
   type: "text" | "password" | "email";
+  variant: "standard" | "outlined" | "filled" | undefined;
 };
 
-function FormInput({ name, control, id, label, type }: Props) {
-
+function FormInput({ name, control, id, label, type, variant }: Props) {
   return (
     <Controller
       name={name}
@@ -29,7 +29,7 @@ function FormInput({ name, control, id, label, type }: Props) {
           id={id}
           label={label}
           name={name}
-          variant="standard"
+          variant={variant}
           autoFocus
           value={value}
           onChange={onChange}

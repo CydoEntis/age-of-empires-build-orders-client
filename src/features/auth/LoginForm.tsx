@@ -44,6 +44,7 @@ function LoginForm() {
               type="text"
               name="username"
               control={control}
+              variant="standard"
             />
             <FormInput
               id="password"
@@ -51,6 +52,7 @@ function LoginForm() {
               type="password"
               name="password"
               control={control}
+              variant="standard"
             />
             <Button
               type="submit"

@@ -12,7 +12,6 @@ import { getAllBuilds } from "./store/slices/buildSlice";
 function App() {
   const dispatch = useAppDispatch();
   const builds = useAppSelector(state => state.builds.builds);
-  // const [builds, setBuilds] = useState([]);
 
   useEffect(() => {
     dispatch(getAllBuilds());
@@ -29,7 +28,7 @@ function App() {
       }}
     >
       <Grid container spacing={2}>
-        {builds && builds.map(build => (<BuildCard key={build.id} name={build.name} description={build.description} civilization={build.civilization} difficulty={build.difficulty} mapType={build.mapType} buildType={build.buildType} creator={""} createdAt={""} updatedAt={""} />))}
+        {builds && builds.map(build => (<BuildCard key={build.id} name={build.name} description={build.description} civilization={build.civilization} difficulty={build.difficulty} mapType={build.mapType} buildType={build.buildType} createdBy={""} createdAt={""} updatedAt={""} />))}
       </Grid>
     </Box>
   );
