@@ -42,7 +42,8 @@ function FromDropdown({
           name="buildType"
           variant="outlined"
           autoFocus
-          onChange={(e) => console.log(e.target.value)}
+          onChange={onChange}
+          value={value}
         >
           {options.map((option: any) => (
             <MenuItem key={option.value} value={option.value}>

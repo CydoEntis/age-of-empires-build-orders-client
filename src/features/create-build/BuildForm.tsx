@@ -229,6 +229,10 @@ function BuildForm({}: Props) {
     });
   }, [steps]);
 
+// TODO: Move out add step into seperate component
+// TODO: Validate step on adding of new step.
+// TODO: Add remove button to each step
+
   return (
     <Box
       sx={{
