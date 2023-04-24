@@ -1,6 +1,6 @@
 import { Typography, TextField, Stack } from "@mui/material";
 import { ZodType, z } from "zod";
-import { Build, BuildWithSteps } from "../../store/slices/buildSlice";
+import { Build, BuildWithSteps, Step } from "../../store/slices/buildSlice";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FromDropdown from "../../components/form/FormDropdown";
@@ -19,7 +19,8 @@ import {
   difficultyEnums,
   mapTypeEnums,
 } from "../../data/zodEnums";
-import BuildStep from "./BuildStep";
+import BuildStep from "./StepForm";
+import { useState } from "react";
 
 const defaultBuildValues: BuildWithSteps = {
   name: "",
@@ -52,6 +53,12 @@ function BuildForm() {
     resolver: zodResolver(buildSchema),
   });
 
+  const [steps, setSteps] = useState<Step[]>([]);
+
+  function handleSteps(data: Step) {
+    setSteps((prevSteps) => [...prevSteps, data]);
+  }
+
   function onSubmit(data: Build) {
     // dispatch(registerUser(data));
   }
@@ -81,8 +88,9 @@ function BuildForm() {
           onChange={(e) => console.log(e.target.value)}
         />
         <Stack
-          direction="row"
+          direction={{ sm: "column", md: "column", lg: "row" }}
           spacing={6}
+          gap={2}
           alignItems="center"
           justifyContent="center"
           py={3}
@@ -101,8 +109,9 @@ function BuildForm() {
           />
         </Stack>
         <Stack
-          direction="row"
+          direction={{ sm: "column", md: "column", lg: "row" }}
           spacing={6}
+          gap={2}
           alignItems="center"
           justifyContent="center"
           py={3}
@@ -120,11 +129,11 @@ function BuildForm() {
             options={buildTypes}
           />
         </Stack>
-        <Steps />
+        <Steps steps={steps} isPreview />
         <Typography variant="h6" mt={3}>
           Add A Step
         </Typography>
-        <BuildStep />
+        <BuildStep handleSteps={handleSteps} />
       </GridItem>
     </>
   );

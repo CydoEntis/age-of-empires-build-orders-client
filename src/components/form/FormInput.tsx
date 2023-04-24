@@ -35,7 +35,13 @@ function FormInput({ name, control, id, label, type, variant }: Props) {
           variant={variant}
           autoFocus
           value={value}
-          onChange={onChange}
+          onChange={(e) => {
+            if (type === "number") {
+              return onChange(parseInt(e.target.value));
+            } else {
+              return onChange(e.target.value);
+            }
+          }}
           type={type}
         />
       )}

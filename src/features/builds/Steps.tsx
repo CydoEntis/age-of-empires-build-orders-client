@@ -8,13 +8,17 @@ import {
   TableBody,
   Grid,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import GridItem from "../../components/grid/GridItem";
 import StepTableHead from "../../components/table/StepTableHead";
 import StepTableBody from "../../components/table/StepTableBody";
 import StepTableRow from "../../components/table/StepTableRow";
+import { Step } from "../../store/slices/buildSlice";
 
-type Props = {};
+type Props = {
+  steps: Step[];
+  isPreview?: boolean;
+};
 
 function createData(
   id: number,
@@ -44,24 +48,27 @@ const steps = [
   createData(5, 14, 7, 0, 0, 3, "	+2 Villagers to Gold; rally to wood"),
 ];
 
-function Steps({}: Props) {
+function Steps({ isPreview, steps }: Props) {
   return (
+    <TableContainer sx={{ maxHeight: "465px" }}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <StepTableHead />
-        <StepTableBody>
-          {steps.map((step) => (
+        <StepTableHead isPreview={isPreview} />
+        <StepTableBody >
+          {steps.map((step, index) => (
             <StepTableRow
-              id={step.id}
+              key={step.id ? step.id : index}
               villagers={step.villagers}
               food={step.food}
               wood={step.wood}
               gold={step.gold}
               stone={step.stone}
               step={step.step}
+              isPreview={isPreview}
             />
           ))}
         </StepTableBody>
       </Table>
+    </TableContainer>
   );
 }
 

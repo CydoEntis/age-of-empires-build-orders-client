@@ -12,11 +12,12 @@ function GridItem({ children }: Props) {
       item
       mt="80px"
       xs={12}
-      sm={12}
+      sm={11}
       md={10}
-      lg={8}
+      lg={10}
       xl={8}
-      p={5}
+      px={{xs: 1, sm: 2, md: 5, lg: 5}}
+      py={5}
       borderRadius=".8rem"
     >
       {children}

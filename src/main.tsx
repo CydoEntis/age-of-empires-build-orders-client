@@ -147,7 +147,6 @@ const getDesignTokens = (mode: PaletteMode) => ({
               },
             },
           },
-
         }),
   },
 });

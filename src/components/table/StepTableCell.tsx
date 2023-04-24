@@ -1,7 +1,7 @@
 import { TableCell } from "@mui/material";
 
 type Props = {
-  item: string | number;
+  item?: string | number;
   type?: string;
   align?: "left" | "center" | "right" | "justify";
 };

@@ -7,9 +7,11 @@ import Wood from "../../assets/wood.png";
 import Gold from "../../assets/gold.png";
 import Stone from "../../assets/stone.png";
 
-type Props = {};
+type Props = {
+  isPreview?: boolean;
+};
 
-function StepTableHead({}: Props) {
+function StepTableHead({ isPreview }: Props) {
   return (
     <TableHead>
       <TableRow>
@@ -29,6 +31,11 @@ function StepTableHead({}: Props) {
           <img src={Stone} />
         </TableCell>
         <TableCell>Step</TableCell>
+        {isPreview && (
+          <>
+            <TableCell></TableCell>
+          </>
+        )}
       </TableRow>
     </TableHead>
   );
