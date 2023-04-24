@@ -20,12 +20,7 @@ type DropdownProps = {
   options: DropdownOption[];
 };
 
-function FromDropdown({
-  name,
-  control,
-  label,
-  options,
-}: DropdownProps) {
+function FromDropdown({ name, control, label, options }: DropdownProps) {
   return (
     <Controller
       name={name}
@@ -38,7 +33,6 @@ function FromDropdown({
           label={label}
           name={name}
           variant="outlined"
-          autoFocus
           onChange={onChange}
           value={value || ""}
         >

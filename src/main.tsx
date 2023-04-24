@@ -88,6 +88,15 @@ const getDesignTokens = (mode: PaletteMode) => ({
               }
               `,
             },
+            MuiTextField: {
+              styleOverrides: {
+                root: {
+                  "&:has(> input:-webkit-autofill)": {
+                    backgroundColor: "transparent",
+                  },
+                },
+              },
+            },
           },
         }
       : {
@@ -127,7 +136,17 @@ const getDesignTokens = (mode: PaletteMode) => ({
               }
               `,
             },
+            MuiInputBase: {
+              styleOverrides: {
+                root: {
+                  "&:has(> input:-webkit-autofill)": {
+                    backgroundColor: "red",
+                  },
+                },
+              },
+            },
           },
+
         }),
   },
 });
