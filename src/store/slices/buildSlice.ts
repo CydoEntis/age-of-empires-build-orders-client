@@ -15,16 +15,18 @@ export interface Build {
     | "MALIANS"
     | "MONGOLS"
     | "OTTOMANS"
-    | "RUS";
+    | "RUS"
+    | "";
 
-  difficulty: "EASY" | "MEDIUM" | "HARD";
-  mapType: "OPEN" | "CLOSED" | "HYBRID" | "WATER";
+  difficulty: "EASY" | "MEDIUM" | "HARD" | "";
+  mapType: "OPEN" | "CLOSED" | "HYBRID" | "WATER" | "";
   buildType:
     | "CHEESE"
     | "DEFENSIVE"
     | "ECONOMIC"
     | "FAST_CASTLE"
-    | "TIMING_ATTACK";
+    | "TIMING_ATTACK"
+    | "";
   createdBy: string;
   createdAt: string;
   updatedAt: string;

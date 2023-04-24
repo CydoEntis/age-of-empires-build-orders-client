@@ -161,10 +161,10 @@ const buildTypes = [
 const defaultBuildValues: BuildWithSteps = {
   name: "",
   description: "",
-  civilization: null,
-  difficulty: null,
-  mapType: null,
-  buildType: null,
+  civilization: "",
+  difficulty: "",
+  mapType: "",
+  buildType: "",
   createdBy: "",
   createdAt: "",
   updatedAt: "",
@@ -172,10 +172,10 @@ const defaultBuildValues: BuildWithSteps = {
 };
 
 function BuildForm({}: Props) {
-  const [steps, setSteps] = useState([<BuildStep key={0} />]);
-
+  const [steps, setSteps] = useState([<BuildStep key={0} handleAddStep={handleAddStep}/>]);
+  console.log(steps);
   function handleAddStep() {
-    setSteps(steps.concat(<BuildStep key={steps.length} />));
+    setSteps(steps.concat(<BuildStep key={steps.length} handleAddStep={handleAddStep}/>));
   }
 
   const buildSchema: ZodType<Build> = z.object({

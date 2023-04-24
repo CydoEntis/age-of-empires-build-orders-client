@@ -1,6 +1,6 @@
 import { Box, Button, Paper, Stack, TextField } from "@mui/material";
 import { MobileTimePicker } from "@mui/x-date-pickers";
-import React from "react";
+import React, { useState } from "react";
 import { ZodType, z } from "zod";
 import { Step } from "../../store/slices/buildSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +16,13 @@ const defaultStepValues: Step = {
   stone: 0,
 };
 
-function BuildStep() {
+type Props = {
+  handleAddStep: () => void;
+};
+
+function BuildStep({ handleAddStep }: Props) {
+  const [showAddButton, setShowAddButton] = useState(true);
+
   const stepSchema: ZodType<Step> = z.object({
     villagerCount: z.number().min(0).max(200).nonnegative(),
     instruction: z.string().min(10).max(50),
@@ -32,7 +38,10 @@ function BuildStep() {
   });
 
   function submitForm(data: Step) {
-    console.log(data)
+    handleAddStep();
+    // setShowAddButton(false);
+    console.log("clicked");
+    console.log(data);
   }
 
   return (
@@ -97,19 +106,21 @@ function BuildStep() {
           type="text"
           variant="outlined"
         />
-        <Button
-          type="button"
-          variant="contained"
-          sx={{
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            display: "block",
-            mt: 1,
-            mb: 1,
-          }}
-        >
-          Add a Step
-        </Button>
+        {showAddButton && (
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              display: "block",
+              mt: 1,
+              mb: 1,
+            }}
+          >
+            Add a Step
+          </Button>
+        )}
       </form>
     </Box>
   );
