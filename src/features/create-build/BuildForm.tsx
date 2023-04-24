@@ -5,6 +5,12 @@ import {
   MenuItem,
   Paper,
   Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
@@ -15,6 +21,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FromDropdown from "../../components/form/FormDropdown";
 import FormInput from "../../components/form/FormInput";
+import BuildPreview from "../builds/BuildPreview";
+import GridItem from "../../components/grid/GridItem";
+import CustomTableCell from "../../components/CustomTableCell";
+
+import Time from "../../assets/time.png"
+import Food from "../../assets/food.png"
+import Wood from "../../assets/wood.png"
+import Gold from "../../assets/gold.png"
+import Stone from "../../assets/stone.png"
 
 type Props = {};
 
@@ -52,11 +67,26 @@ export enum BuildType {
   TIMING_ATTACK = "TIMING_ATTACK",
 }
 
-
-const civilizationEnums = ["ABBASID_DYNASTY", "CHINESE", "DELHI_SULTANTE", "ENGLISH", "FRENCH", "HOLY_ROMAN_EMPIRE", "MALIANS", "OTTOMANS","RUS"] as const;
+const civilizationEnums = [
+  "ABBASID_DYNASTY",
+  "CHINESE",
+  "DELHI_SULTANTE",
+  "ENGLISH",
+  "FRENCH",
+  "HOLY_ROMAN_EMPIRE",
+  "MALIANS",
+  "OTTOMANS",
+  "RUS",
+] as const;
 const difficultyEnums = ["EASY", "MEDIUM", "HARD"] as const;
-const mapTypeEnums = ["OPEN", "CLOSED", "HYBRID", "WATER",] as const;
-const buildTypeEnums = ["CHEESE", "DEFENSIVE", "ECONOMIC", "FAST_CASTLE", "TIMING_ATTACK"] as const;
+const mapTypeEnums = ["OPEN", "CLOSED", "HYBRID", "WATER"] as const;
+const buildTypeEnums = [
+  "CHEESE",
+  "DEFENSIVE",
+  "ECONOMIC",
+  "FAST_CASTLE",
+  "TIMING_ATTACK",
+] as const;
 
 const civilizations = [
   {
@@ -171,13 +201,35 @@ const defaultBuildValues: BuildWithSteps = {
   steps: [],
 };
 
-function BuildForm({}: Props) {
-  const [steps, setSteps] = useState([<BuildStep key={0} handleAddStep={handleAddStep}/>]);
-  console.log(steps);
-  function handleAddStep() {
-    setSteps(steps.concat(<BuildStep key={steps.length} handleAddStep={handleAddStep}/>));
-  }
+function createData(
+  id: number,
+  time: string,
+  food: number,
+  wood: number,
+  gold: number,
+  stone: number,
+  text: string
+) {
+  return { id, time, food, wood, gold, stone, text };
+}
 
+const rows = [
+  createData(1, "00:00", 6, 0, 0, 0, "Select TC and make villagers"),
+  createData(2, "00:00", 6, 0, 0, 0, "+6 Villagers to Sheep; rally to sheep"),
+  createData(3, "00:20", 7, 0, 0, 0, "+1 Villager to Sheep; rally to gold"),
+  createData(
+    4,
+    "00:40",
+    7,
+    0,
+    0,
+    1,
+    "+1 Villager to Gold; Use this villager to build a house + mining camp"
+  ),
+  createData(5, "01:20", 7, 0, 0, 3, "	+2 Villagers to Gold; rally to wood"),
+];
+
+function BuildForm({}: Props) {
   const buildSchema: ZodType<Build> = z.object({
     name: z.string().min(5).max(20),
     description: z.string().min(10).max(50),
@@ -190,48 +242,22 @@ function BuildForm({}: Props) {
     updatedAt: z.string(),
   });
 
-  const { handleSubmit, control } =
-    useForm<BuildWithSteps>({
-      defaultValues: defaultBuildValues,
-      resolver: zodResolver(buildSchema),
-    });
+  const { handleSubmit, control } = useForm<BuildWithSteps>({
+    defaultValues: defaultBuildValues,
+    resolver: zodResolver(buildSchema),
+  });
 
   function onSubmit(data: Build) {
     // dispatch(registerUser(data));
   }
-
-  useEffect(() => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: "smooth",
-    });
-  }, [steps]);
 
   // TODO: Move out add step into seperate component
   // TODO: Validate step on adding of new step.
   // TODO: Add remove button to each step
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        backgroundColor: "primary",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-      p={10}
-    >
-      <Box
-        component={Paper}
-        width={3 / 5}
-        sx={{
-          backgroundColor: "secondary",
-          maxHeight: "1200px",
-          borderRadius: ".8rem",
-        }}
-        p={5}
-      >
+    <>
+      <GridItem>
         <Typography variant="h3">Create A New Build</Typography>
         <FormInput
           id="buildName"
@@ -296,24 +322,64 @@ function BuildForm({}: Props) {
         <Typography variant="h6" mt={3}>
           Add A Step
         </Typography>
-      </Box>
-      {steps}
-      <Box width={3 / 5}>
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            display: "block",
-            mt: 1,
-            mb: 1,
-          }}
-        >
-          Create Build
-        </Button>
-      </Box>
-    </Box>
+        <BuildStep />
+      </GridItem>
+      <GridItem>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">
+                  <img src={Time} />
+                </TableCell>
+                <TableCell align="center" sx={{ backgroundColor: "#ff61615d" }}>
+                  <img src={Food} />
+                </TableCell>
+                <TableCell align="center" sx={{ backgroundColor: "#ffc0615d" }}>
+                  <img src={Wood} />
+                </TableCell>
+                <TableCell align="center" sx={{ backgroundColor: "#ffea2b77" }}>
+                  <img src={Gold} />
+                </TableCell>
+                <TableCell align="center" sx={{ backgroundColor: "#fdedd65d" }}>
+                  <img src={Stone} />
+                </TableCell>
+                <TableCell>Step</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <CustomTableCell item={row.time} />
+                  <CustomTableCell
+                    item={row.food}
+                    type={"food"}
+                    align="center"
+                  />
+                  <CustomTableCell
+                    item={row.wood}
+                    type={"wood"}
+                    align="center"
+                  />
+                  <CustomTableCell
+                    item={row.gold}
+                    type={"gold"}
+                    align="center"
+                  />
+                  <CustomTableCell
+                    item={row.stone}
+                    type={"stone"}
+                    align="center"
+                  />
+                  <CustomTableCell item={row.text} />
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+      </GridItem>
+    </>
   );
 }
 

@@ -20,6 +20,7 @@ import Build from "./pages/Build";
 import DancingScript from "./assets/fonts/DancingScript-Regular.ttf";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
+import CreateBuild from "./pages/CreateBuild";
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "build/create",
-        element: <BuildForm />,
+        element: <CreateBuild />,
       },
       {
         path: "build/:buildId",
