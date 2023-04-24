@@ -10,7 +10,7 @@ import GridItem from "../../components/grid/GridItem";
 
 const defaultStepValues: Step = {
   villagerCount: 0,
-  instruction: "",
+  step: "",
   food: 0,
   wood: 0,
   gold: 0,
@@ -20,7 +20,7 @@ const defaultStepValues: Step = {
 function BuildStep() {
   const stepSchema: ZodType<Step> = z.object({
     villagerCount: z.number().min(0).max(200).nonnegative(),
-    instruction: z.string().min(10).max(50),
+    step: z.string().min(10).max(50),
     food: z.number().min(0).max(200).nonnegative(),
     wood: z.number().min(0).max(200).nonnegative(),
     gold: z.number().min(0).max(200).nonnegative(),
@@ -83,9 +83,9 @@ function BuildStep() {
           />
         </Stack>
         <FormInput
-          id="instruction"
-          name="instruction"
-          label="Instructions"
+          id="step"
+          name="step"
+          label="Step"
           control={control}
           type="text"
           variant="outlined"

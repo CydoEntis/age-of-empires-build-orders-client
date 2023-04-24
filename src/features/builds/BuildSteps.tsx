@@ -14,7 +14,7 @@ import Wood from "../../assets/wood.png"
 import Gold from "../../assets/gold.png"
 import Stone from "../../assets/stone.png"
 import React from "react";
-import CustomTableCell from "../../components/CustomTableCell";
+import CustomTableCell from "../../components/table/StepTableCell";
 
 type Props = {};
 

@@ -6,7 +6,7 @@ type Props = {
   align?: "left" | "center" | "right" | "justify";
 };
 
-function CustomTableCell({ item, type, align }: Props) {
+function StepTableCell({ item, type, align }: Props) {
   let color = "";
   switch (type) {
     case "food":
@@ -32,7 +32,7 @@ function CustomTableCell({ item, type, align }: Props) {
       sx={{
         backgroundColor: `${color}`,
         fontFamily: "Inter",
-        fontSize: "1.45rem",
+        fontSize: "1.1rem",
       }}
     >
       {item}
@@ -40,4 +40,4 @@ function CustomTableCell({ item, type, align }: Props) {
   );
 }
 
-export default CustomTableCell;
+export default StepTableCell;
