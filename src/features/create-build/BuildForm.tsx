@@ -1,187 +1,25 @@
-import {
-  Typography,
-  TextField,
-  Button,
-  MenuItem,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
-import BuildStep from "./BuildStep";
+import { Typography, TextField, Stack } from "@mui/material";
 import { ZodType, z } from "zod";
-import { Build, BuildWithSteps, Step } from "../../store/slices/buildSlice";
+import { Build, BuildWithSteps } from "../../store/slices/buildSlice";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FromDropdown from "../../components/form/FormDropdown";
 import FormInput from "../../components/form/FormInput";
-import BuildPreview from "../builds/Steps";
 import GridItem from "../../components/grid/GridItem";
-import CustomTableCell from "../../components/table/StepTableCell";
 import Steps from "../builds/Steps";
-
-type Props = {};
-
-export enum Difficulty {
-  EASY = "EASY",
-  MEDIUM = "MEDIUM",
-  HARD = "HARD",
-}
-
-export enum Civilization {
-  ABBASID_DYNASTY = "ABBASID_DYNASTY",
-  CHINESE = "CHINESE",
-  DELHI_SULTANTATE = "DELHI_SULTANTE",
-  ENGLISH = "ENGLISH",
-  FRENCH = "FRENCH",
-  HOLY_ROMAN_EMPIRE = "HOLY_ROMAN_EMPIRE",
-  MALIANS = "MALIANS",
-  MONGOLS = "MONGOLS",
-  OTTOMAS = "OTTOMANS",
-  RUS = "RUS",
-}
-
-export enum MapType {
-  OPEN = "OPEN",
-  CLOSE = "CLOSED",
-  HYBRID = "HYBRID",
-  WATER = "WATER",
-}
-
-export enum BuildType {
-  CHEESE = "CHEESE",
-  DEFENSIVE = "DEFENSIVE",
-  ECONOMIC = "ECONOMIC",
-  FAST_CASTLE = "FAST_CASTLE",
-  TIMING_ATTACK = "TIMING_ATTACK",
-}
-
-const civilizationEnums = [
-  "ABBASID_DYNASTY",
-  "CHINESE",
-  "DELHI_SULTANTE",
-  "ENGLISH",
-  "FRENCH",
-  "HOLY_ROMAN_EMPIRE",
-  "MALIANS",
-  "OTTOMANS",
-  "RUS",
-] as const;
-const difficultyEnums = ["EASY", "MEDIUM", "HARD"] as const;
-const mapTypeEnums = ["OPEN", "CLOSED", "HYBRID", "WATER"] as const;
-const buildTypeEnums = [
-  "CHEESE",
-  "DEFENSIVE",
-  "ECONOMIC",
-  "FAST_CASTLE",
-  "TIMING_ATTACK",
-] as const;
-
-const civilizations = [
-  {
-    value: "ABBASID_DYNASTY",
-    label: "Abbasid Dynasty",
-  },
-  {
-    value: "CHINESE",
-    label: "Chinese",
-  },
-  {
-    value: "DELHI_SULTANTE",
-    label: "Delhi Sultanate",
-  },
-  {
-    value: "ENGLISH",
-    label: "English",
-  },
-  {
-    value: "FRENCH",
-    label: "French",
-  },
-  {
-    value: "HOLY_ROMAN_EMPIRE",
-    label: "Holy Roman Empire",
-  },
-  {
-    value: "MALIANS",
-    label: "Malians",
-  },
-  {
-    value: "MONGOLS",
-    label: "Mongols",
-  },
-  {
-    value: "OTTOMANS",
-    label: "Ottomans",
-  },
-  {
-    value: "RUS",
-    label: "Rus",
-  },
-];
-
-const difficulties = [
-  {
-    value: "EASY",
-    label: "Easy",
-  },
-  {
-    value: "MEDIUM",
-    label: "Medium",
-  },
-  {
-    value: "HARD",
-    label: "Hard",
-  },
-];
-
-const mapTypes = [
-  {
-    value: "OPEN",
-    label: "Open",
-  },
-  {
-    value: "CLOSED",
-    label: "Closed",
-  },
-  {
-    value: "HYBRID",
-    label: "Hybrid",
-  },
-  {
-    value: "WATER",
-    label: "Water",
-  },
-];
-
-const buildTypes = [
-  {
-    value: "TIMING_ATTACK",
-    label: "Timing Attack",
-  },
-  {
-    value: "CHEESE",
-    label: "Cheese",
-  },
-  {
-    value: "ECONOMIC",
-    label: "Economic",
-  },
-  {
-    value: "DEFENSIVE",
-    label: "Defensive",
-  },
-  {
-    value: "FAST_CASTLE",
-    label: "Fast Castle",
-  },
-];
+import {
+  civilizations,
+  difficulties,
+  mapTypes,
+  buildTypes,
+} from "../../data/buildData";
+import {
+  buildTypeEnums,
+  civilizationEnums,
+  difficultyEnums,
+  mapTypeEnums,
+} from "../../data/zodEnums";
+import BuildStep from "./BuildStep";
 
 const defaultBuildValues: BuildWithSteps = {
   name: "",
@@ -196,7 +34,7 @@ const defaultBuildValues: BuildWithSteps = {
   steps: [],
 };
 
-function BuildForm({}: Props) {
+function BuildForm() {
   const buildSchema: ZodType<Build> = z.object({
     name: z.string().min(5).max(20),
     description: z.string().min(10).max(50),
@@ -217,10 +55,6 @@ function BuildForm({}: Props) {
   function onSubmit(data: Build) {
     // dispatch(registerUser(data));
   }
-
-  // TODO: Move out add step into seperate component
-  // TODO: Validate step on adding of new step.
-  // TODO: Add remove button to each step
 
   return (
     <>

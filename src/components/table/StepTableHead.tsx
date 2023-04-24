@@ -1,11 +1,11 @@
 import { TableCell, TableHead, TableRow } from "@mui/material";
 import React from "react";
 
-import Time from "../../assets/time.png"
-import Food from "../../assets/food.png"
-import Wood from "../../assets/wood.png"
-import Gold from "../../assets/gold.png"
-import Stone from "../../assets/stone.png"
+import Villager from "../../assets/villager.png";
+import Food from "../../assets/food.png";
+import Wood from "../../assets/wood.png";
+import Gold from "../../assets/gold.png";
+import Stone from "../../assets/stone.png";
 
 type Props = {};
 
@@ -14,7 +14,7 @@ function StepTableHead({}: Props) {
     <TableHead>
       <TableRow>
         <TableCell align="center">
-          <img src={Time} />
+          <img src={Villager} />
         </TableCell>
         <TableCell align="center" sx={{ backgroundColor: "#ff61615d" }}>
           <img src={Food} />
