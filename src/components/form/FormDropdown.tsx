@@ -16,7 +16,6 @@ interface DropdownOption {
 type DropdownProps = {
   name: string;
   control: any;
-  defaultValue: string;
   label: string;
   options: DropdownOption[];
 };
@@ -24,7 +23,6 @@ type DropdownProps = {
 function FromDropdown({
   name,
   control,
-  defaultValue,
   label,
   options,
 }: DropdownProps) {
@@ -35,18 +33,17 @@ function FromDropdown({
       render={({ field: { onChange, value } }) => (
         <TextField
           select
-          defaultValue={defaultValue}
+          defaultValue=""
           fullWidth
-          id="buildType"
           label={label}
-          name="buildType"
+          name={name}
           variant="outlined"
           autoFocus
           onChange={onChange}
-          value={value}
+          value={value || ""}
         >
           {options.map((option: any) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem key={option.value} value={option.value} defaultValue="">
               {option.label}
             </MenuItem>
           ))}

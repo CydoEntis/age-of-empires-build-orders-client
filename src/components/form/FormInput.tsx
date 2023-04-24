@@ -7,7 +7,7 @@ type Props = {
   name: string;
   label: string;
   control: any;
-  type: "text" | "password" | "email";
+  type: "text" | "password" | "email" | "number";
   variant: "standard" | "outlined" | "filled" | undefined;
 };
 

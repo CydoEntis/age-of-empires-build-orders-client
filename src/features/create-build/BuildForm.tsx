@@ -52,6 +52,12 @@ export enum BuildType {
   TIMING_ATTACK = "TIMING_ATTACK",
 }
 
+
+const civilizationEnums = ["ABBASID_DYNASTY", "CHINESE", "DELHI_SULTANTE", "ENGLISH", "FRENCH", "HOLY_ROMAN_EMPIRE", "MALIANS", "OTTOMANS","RUS"] as const;
+const difficultyEnums = ["EASY", "MEDIUM", "HARD"] as const;
+const mapTypeEnums = ["OPEN", "CLOSED", "HYBRID", "WATER",] as const;
+const buildTypeEnums = ["CHEESE", "DEFENSIVE", "ECONOMIC", "FAST_CASTLE", "TIMING_ATTACK"] as const;
+
 const civilizations = [
   {
     value: "ABBASID_DYNASTY",
@@ -165,57 +171,29 @@ const defaultBuildValues: BuildWithSteps = {
   steps: [],
 };
 
-const defaultStepValues: Step = {
-  time: "",
-  description: "",
-  food: 0,
-  wood: 0,
-  gold: 0,
-  stone: 0,
-};
-
 function BuildForm({}: Props) {
-  const [steps, setSteps] = useState([<BuildStep stepNumber={1} key={0} />]);
+  const [steps, setSteps] = useState([<BuildStep key={0} />]);
 
   function handleAddStep() {
-    setSteps(
-      steps.concat(
-        <BuildStep stepNumber={steps.length + 1} key={steps.length} />
-      )
-    );
+    setSteps(steps.concat(<BuildStep key={steps.length} />));
   }
 
   const buildSchema: ZodType<Build> = z.object({
     name: z.string().min(5).max(20),
     description: z.string().min(10).max(50),
-    civilization: z.nativeEnum(Civilization),
-    difficulty: z.nativeEnum(Difficulty),
-    mapType: z.nativeEnum(MapType),
-    buildType: z.nativeEnum(BuildType),
+    civilization: z.enum(civilizationEnums),
+    difficulty: z.enum(difficultyEnums),
+    mapType: z.enum(mapTypeEnums),
+    buildType: z.enum(buildTypeEnums),
     createdBy: z.string(),
     createdAt: z.string(),
     updatedAt: z.string(),
   });
 
-  const stepSchema: ZodType<Step> = z.object({
-    time: z.string().min(0),
-    description: z.string().min(10).max(50),
-    food: z.number().min(0).max(200),
-    wood: z.number().min(0).max(200),
-    gold: z.number().min(0).max(200),
-    stone: z.number().min(0).max(200),
-  });
-
-  const { handleSubmit: handleBuildSubmit, control: buildControl } =
+  const { handleSubmit, control } =
     useForm<BuildWithSteps>({
       defaultValues: defaultBuildValues,
       resolver: zodResolver(buildSchema),
-    });
-
-  const { handleSubmit: handleStepSubmit, control: stepControl } =
-    useForm<Step>({
-      defaultValues: defaultStepValues,
-      resolver: zodResolver(stepSchema),
     });
 
   function onSubmit(data: Build) {
@@ -229,9 +207,9 @@ function BuildForm({}: Props) {
     });
   }, [steps]);
 
-// TODO: Move out add step into seperate component
-// TODO: Validate step on adding of new step.
-// TODO: Add remove button to each step
+  // TODO: Move out add step into seperate component
+  // TODO: Validate step on adding of new step.
+  // TODO: Add remove button to each step
 
   return (
     <Box
@@ -259,7 +237,7 @@ function BuildForm({}: Props) {
           id="buildName"
           name="name"
           label="Build Name"
-          control={buildControl}
+          control={control}
           type="text"
           variant="outlined"
         />
@@ -284,15 +262,13 @@ function BuildForm({}: Props) {
         >
           <FromDropdown
             name="civilization"
-            control={buildControl}
-            defaultValue="ABBASID_DYNASTY"
+            control={control}
             label="Select a Civilization"
             options={civilizations}
           />
           <FromDropdown
             name="difficulty"
-            control={buildControl}
-            defaultValue="EASY"
+            control={control}
             label="Select a Difficulty"
             options={difficulties}
           />
@@ -306,15 +282,13 @@ function BuildForm({}: Props) {
         >
           <FromDropdown
             name="mapType"
-            control={buildControl}
-            defaultValue="OPEN"
+            control={control}
             label="Select a Map Type"
             options={mapTypes}
           />
           <FromDropdown
             name="buildType"
-            control={buildControl}
-            defaultValue="ECONOMIC"
+            control={control}
             label="Select a Build Type"
             options={buildTypes}
           />
@@ -325,20 +299,6 @@ function BuildForm({}: Props) {
       </Box>
       {steps}
       <Box width={3 / 5}>
-        <Button
-          type="button"
-          variant="contained"
-          sx={{
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            display: "block",
-            mt: 1,
-            mb: 1,
-          }}
-          onClick={handleAddStep}
-        >
-          Add a Step
-        </Button>
         <Button
           type="submit"
           variant="contained"

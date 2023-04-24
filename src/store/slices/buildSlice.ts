@@ -15,30 +15,29 @@ export interface Build {
     | "MALIANS"
     | "MONGOLS"
     | "OTTOMANS"
-    | "RUS"
-    | null;
-  difficulty: "EASY" | "MEDIUM" | "HARD" | null;
-  mapType: "OPEN" | "CLOSED" | "HYBRID" | "WATER" | null;
+    | "RUS";
+
+  difficulty: "EASY" | "MEDIUM" | "HARD";
+  mapType: "OPEN" | "CLOSED" | "HYBRID" | "WATER";
   buildType:
     | "CHEESE"
     | "DEFENSIVE"
     | "ECONOMIC"
     | "FAST_CASTLE"
-    | "TIMING_ATTACK"
-    | null;
+    | "TIMING_ATTACK";
   createdBy: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface BuildWithSteps extends Build {
-  steps: Step[]
+  steps: Step[];
 }
 
 export interface Step {
   id?: string;
-  time: string;
-  description: string;
+  villagerCount: number;
+  instruction: string;
   food: number;
   wood: number;
   gold: number;
