@@ -1,4 +1,11 @@
-import { Typography, TextField, Stack, Button, Grid, Paper } from "@mui/material";
+import {
+  Typography,
+  TextField,
+  Stack,
+  Button,
+  Grid,
+  Paper,
+} from "@mui/material";
 import { ZodType, z } from "zod";
 import {
   Build,
@@ -29,6 +36,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import FormTextArea from "../../components/form/FormTextArea";
 import { useNavigate } from "react-router-dom";
+import StepsNotFound from "../../components/not-found/StepsNotFound";
 
 const defaultBuildValues: Build = {
   title: "",
@@ -82,8 +90,21 @@ function BuildForm() {
   }
 
   return (
-    <Grid container sx={{ margin: "0 auto" }} spacing={3}>
-      <Grid m={2} component={Paper} elevation={8} item xs={12} sm={12} md={12} lg={5} xl={5} py={5} px={2} sx={{borderRadius: ".4rem"}}>
+    <Grid container sx={{ margin: "0 auto" }} spacing={{ md: 3 }}>
+      <Grid
+        m={2}
+        component={Paper}
+        elevation={8}
+        item
+        xs={12}
+        sm={12}
+        md={12}
+        lg={5}
+        xl={5}
+        py={5}
+        px={2}
+        sx={{ borderRadius: ".4rem" }}
+      >
         <Typography variant="h3">Create A New Build</Typography>
 
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -160,8 +181,21 @@ function BuildForm() {
         </form>
         <StepForm handleSteps={handleSteps} />
       </Grid>
-      <Grid m={2} component={Paper} elevation={8} item xs={12} sm={12} lg={6} xl={6} py={5} px={2} sx={{borderRadius: ".4rem"}}>
-        <Steps steps={steps} isPreview />
+      <Grid
+        m={2}
+        component={Paper}
+        elevation={8}
+        item
+        xs={12}
+        sm={12}
+        lg={6}
+        xl={6}
+        py={5}
+        px={2}
+        sx={{ borderRadius: ".4rem" }}
+      >
+        {steps.length <= 0 && <StepsNotFound />}
+        {steps.length > 0 && <Steps steps={steps} isPreview />}
       </Grid>
     </Grid>
   );

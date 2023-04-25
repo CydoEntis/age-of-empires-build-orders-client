@@ -57,7 +57,7 @@ function StepForm({ handleSteps }: Props) {
         <Typography variant="h6" mt={3}>
           Add A Step
         </Typography>
-        <Stack direction="row" gap={5}>
+        <Stack direction={{ xs: "column", sm: "row"}} gap={5}>
           <FormInput
             id="villagers"
             name="villagers"

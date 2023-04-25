@@ -34,7 +34,7 @@ function StepTableRow({
       <StepTableCell item={wood} type={"wood"} align="center" />
       <StepTableCell item={gold} type={"gold"} align="center" />
       <StepTableCell item={stone} type={"stone"} align="center" />
-      <StepTableCell item={step} />
+      <StepTableCell item={step}  />
       {isPreview && (
         <TableCell>
             <BsFillTrashFill fontSize="1.5rem" color="#ff6161"/>
