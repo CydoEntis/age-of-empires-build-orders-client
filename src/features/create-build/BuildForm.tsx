@@ -92,13 +92,13 @@ function BuildForm() {
             label="Build Name"
             control={control}
             type="text"
-            variant="outlined"
+            variant="filled"
           />
           <FormTextArea
             name="description"
             label="Description"
             control={control}
-            variant="outlined"
+            variant="filled"
           />
 
           <Stack

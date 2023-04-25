@@ -27,7 +27,7 @@ function FromDropdown({ name, control, label, options }: DropdownProps) {
           fullWidth
           label={label}
           name={name}
-          variant="outlined"
+          variant="filled"
           onChange={onChange}
           value={value || ""}
         >

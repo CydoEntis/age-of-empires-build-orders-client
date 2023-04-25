@@ -50,7 +50,7 @@ function StepForm({ handleSteps }: Props) {
           label="Villagers"
           control={control}
           type="number"
-          variant="outlined"
+          variant="standard"
         />
         <FormInput
           id="food"
@@ -58,7 +58,7 @@ function StepForm({ handleSteps }: Props) {
           label="Food"
           control={control}
           type="number"
-          variant="outlined"
+          variant="standard"
         />
         <FormInput
           id="wood"
@@ -66,7 +66,7 @@ function StepForm({ handleSteps }: Props) {
           label="Wood"
           control={control}
           type="number"
-          variant="outlined"
+          variant="standard"
         />
         <FormInput
           id="gold"
@@ -74,7 +74,7 @@ function StepForm({ handleSteps }: Props) {
           label="Gold"
           control={control}
           type="number"
-          variant="outlined"
+          variant="standard"
         />
         <FormInput
           id="stone"
@@ -82,7 +82,7 @@ function StepForm({ handleSteps }: Props) {
           label="Stone"
           control={control}
           type="number"
-          variant="outlined"
+          variant="standard"
         />
       </Stack>
       <FormInput
@@ -91,7 +91,7 @@ function StepForm({ handleSteps }: Props) {
         label="Step"
         control={control}
         type="text"
-        variant="outlined"
+        variant="standard"
       />
       <Button
         type="submit"

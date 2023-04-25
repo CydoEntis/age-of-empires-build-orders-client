@@ -73,7 +73,7 @@ function BuildCard({
     <Card
       elevation={8}
       component={Paper}
-      sx={{ display: "flex", borderRadius: ".8rem", marginBotton: "6px"}}
+      sx={{ display: "flex", borderRadius: ".2rem", marginBotton: "6px"}}
     >
       <Box sx={{ width: "230px", position: "relative" }}>
         <Box
