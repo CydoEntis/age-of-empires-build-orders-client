@@ -1,4 +1,4 @@
-import { Typography, TextField, Stack, Button } from "@mui/material";
+import { Typography, TextField, Stack, Button, Grid, Paper } from "@mui/material";
 import { ZodType, z } from "zod";
 import {
   Build,
@@ -24,7 +24,7 @@ import {
   difficultyEnums,
   mapTypeEnums,
 } from "../../data/zodEnums";
-import BuildStep from "./StepForm";
+import StepForm from "./StepForm";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import FormTextArea from "../../components/form/FormTextArea";
@@ -82,9 +82,10 @@ function BuildForm() {
   }
 
   return (
-    <>
-      <GridItem>
+    <Grid container sx={{ margin: "0 auto" }} spacing={3}>
+      <Grid m={2} component={Paper} elevation={8} item xs={12} sm={12} md={12} lg={5} xl={5} py={5} px={2} sx={{borderRadius: ".4rem"}}>
         <Typography variant="h3">Create A New Build</Typography>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormInput
             id="title"
@@ -157,14 +158,12 @@ function BuildForm() {
             Create Build
           </Button>
         </form>
-
+        <StepForm handleSteps={handleSteps} />
+      </Grid>
+      <Grid m={2} component={Paper} elevation={8} item xs={12} sm={12} lg={6} xl={6} py={5} px={2} sx={{borderRadius: ".4rem"}}>
         <Steps steps={steps} isPreview />
-        <Typography variant="h6" mt={3}>
-          Add A Step
-        </Typography>
-        <BuildStep handleSteps={handleSteps} />
-      </GridItem>
-    </>
+      </Grid>
+    </Grid>
   );
 }
 

@@ -48,12 +48,14 @@ export interface Step {
 
 export interface BuildsState {
   builds: Build[];
+  build: BuildWithSteps | null;
 }
 
 const apiEndpoint = `${import.meta.env.VITE_API_ENDPOINT}`;
 
 const initialState: BuildsState = {
   builds: [],
+  build: null
 };
 
 export const getAllBuilds = createAsyncThunk("/builds", async () => {
@@ -64,6 +66,15 @@ export const getAllBuilds = createAsyncThunk("/builds", async () => {
     throw new Error();
   }
 });
+
+export const getBuildById = createAsyncThunk("builds/id", async(id: string) => {
+  try {
+    const res = await axios(`${apiEndpoint}/builds/${id}`);
+    return res.data;
+  } catch (error: any) {
+    throw new Error();
+  }
+})
 
 export function setHeaders() {
   return {
@@ -112,6 +123,9 @@ const buildsSlice = createSlice({
     builder.addCase(createBuild.fulfilled, (state, action) => {
       state.builds.push(action.payload);
     });
+    builder.addCase(getBuildById.fulfilled, (state, action) => {
+      state.build = action.payload;
+    })
   },
 });
 

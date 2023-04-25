@@ -15,6 +15,7 @@ function Builds({builds}: Props) {
           builds.map((build) => (
             <BuildCard
               key={build.id}
+              id={build.id}
               title={build.title}
               description={build.description}
               civilization={build.civilization}

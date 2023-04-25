@@ -50,8 +50,8 @@ const steps = [
 
 function Steps({ isPreview, steps }: Props) {
   return (
-    <TableContainer sx={{ maxHeight: "465px" }}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer>
+      <Table>
         <StepTableHead isPreview={isPreview} />
         <StepTableBody >
           {steps.map((step, index) => (

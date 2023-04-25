@@ -1,4 +1,12 @@
-import { Box, Button, Paper, Stack, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { MobileTimePicker } from "@mui/x-date-pickers";
 import React, { useState } from "react";
 import { ZodType, z } from "zod";
@@ -24,7 +32,10 @@ const defaultStepValues: Step = {
 function StepForm({ handleSteps }: Props) {
   const stepSchema: ZodType<Step> = z.object({
     villagers: z.number().min(0).max(200).nonnegative(),
-    step: z.string().min(10, "Step must be longer than 10 characters.").max(250),
+    step: z
+      .string()
+      .min(10, "Step must be longer than 10 characters.")
+      .max(250),
     food: z.number().min(0).max(200).nonnegative(),
     wood: z.number().min(0).max(200).nonnegative(),
     gold: z.number().min(0).max(200).nonnegative(),
@@ -42,71 +53,74 @@ function StepForm({ handleSteps }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
-      <Stack direction="row" gap={5}>
+      <form onSubmit={handleSubmit(submitForm)}>
+        <Typography variant="h6" mt={3}>
+          Add A Step
+        </Typography>
+        <Stack direction="row" gap={5}>
+          <FormInput
+            id="villagers"
+            name="villagers"
+            label="Villagers"
+            control={control}
+            type="number"
+            variant="standard"
+          />
+          <FormInput
+            id="food"
+            name="food"
+            label="Food"
+            control={control}
+            type="number"
+            variant="standard"
+          />
+          <FormInput
+            id="wood"
+            name="wood"
+            label="Wood"
+            control={control}
+            type="number"
+            variant="standard"
+          />
+          <FormInput
+            id="gold"
+            name="gold"
+            label="Gold"
+            control={control}
+            type="number"
+            variant="standard"
+          />
+          <FormInput
+            id="stone"
+            name="stone"
+            label="Stone"
+            control={control}
+            type="number"
+            variant="standard"
+          />
+        </Stack>
         <FormInput
-          id="villagers"
-          name="villagers"
-          label="Villagers"
+          id="step"
+          name="step"
+          label="Step"
           control={control}
-          type="number"
+          type="text"
           variant="standard"
         />
-        <FormInput
-          id="food"
-          name="food"
-          label="Food"
-          control={control}
-          type="number"
-          variant="standard"
-        />
-        <FormInput
-          id="wood"
-          name="wood"
-          label="Wood"
-          control={control}
-          type="number"
-          variant="standard"
-        />
-        <FormInput
-          id="gold"
-          name="gold"
-          label="Gold"
-          control={control}
-          type="number"
-          variant="standard"
-        />
-        <FormInput
-          id="stone"
-          name="stone"
-          label="Stone"
-          control={control}
-          type="number"
-          variant="standard"
-        />
-      </Stack>
-      <FormInput
-        id="step"
-        name="step"
-        label="Step"
-        control={control}
-        type="text"
-        variant="standard"
-      />
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          display: "block",
-          mt: 1,
-          mb: 1,
-        }}
-      >
-        Add a Step
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            display: "block",
+            mt: 1,
+            mb: 1,
+          }}
+        >
+          Add a Step
+        </Button>
+      </form>
   );
 }
 

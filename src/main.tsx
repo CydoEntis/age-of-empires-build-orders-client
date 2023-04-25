@@ -4,8 +4,8 @@ import App from "./App";
 import "./index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/LoginPage";
+import Register from "./pages/RegisterPage";
 import BuildForm from "./features/create-build/BuildForm";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -16,11 +16,12 @@ import {
   PaletteMode,
   ThemeProvider,
 } from "@mui/material";
-import Build from "./pages/Build";
+import Build from "./pages/BuildPage";
 import DancingScript from "./assets/fonts/DancingScript-Regular.ttf";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
-import CreateBuild from "./pages/CreateBuild";
+import CreateBuild from "./pages/CreateBuildPage";
+import BuildPage from "./pages/BuildPage";
 
 const router = createBrowserRouter([
   {
@@ -44,8 +45,8 @@ const router = createBrowserRouter([
         element: <CreateBuild />,
       },
       {
-        path: "build/:buildId",
-        element: <Build />,
+        path: "builds/:buildId",
+        element: <BuildPage />,
       },
     ],
   },

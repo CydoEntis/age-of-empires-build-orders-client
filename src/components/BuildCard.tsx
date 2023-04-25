@@ -22,10 +22,11 @@ import MongolFlag from "../assets/mongol.png";
 import OttomanFlag from "../assets/ottoman.png";
 import RusFlag from "../assets/rus.png";
 import { Build } from "../store/slices/buildSlice";
-import BaseGrid from "./layout/BaseGrid";
 import Tag from "./tag/Tag";
+import { Link } from "react-router-dom";
 
 function BuildCard({
+  id,
   title,
   createdBy,
   civilization,
@@ -70,44 +71,51 @@ function BuildCard({
   }
 
   return (
-    <Card
-      elevation={8}
-      component={Paper}
-      sx={{ display: "flex", borderRadius: ".2rem", marginBotton: "6px"}}
-    >
-      <Box sx={{ width: "230px", position: "relative" }}>
-        <Box
-          className="img-overlay"
-          sx={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            zIndex: 99,
-          }}
-        />
-        <Box component="img" sx={{ width: "100%" }} height="100%" src={image} />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+    <Link style={{textDecoration: "none"}} to={`/builds/${id}`}>
+      <Card
+        elevation={8}
+        component={Paper}
+        sx={{ display: "flex", borderRadius: ".2rem", marginBotton: "6px" }}
       >
-        <CardContent>
-          <Typography variant="h5" component="div" mb={2}>
-            {title}
-          </Typography>
-          <Stack direction="row" spacing={1}>
-            <Tag text={createdBy} />
-            <Tag text={difficulty} />
-            <Tag text={mapType} />
-            <Tag text={buildType} />
-          </Stack>
-        </CardContent>
-      </Box>
-    </Card>
+        <Box sx={{ width: "230px", position: "relative" }}>
+          <Box
+            className="img-overlay"
+            sx={{
+              width: "100%",
+              height: "100%",
+              position: "absolute",
+              zIndex: 99,
+            }}
+          />
+          <Box
+            component="img"
+            sx={{ width: "100%" }}
+            height="100%"
+            src={image}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CardContent>
+            <Typography variant="h5" component="div" mb={2}>
+              {title}
+            </Typography>
+            <Stack direction="row" spacing={1}>
+              <Tag text={createdBy} />
+              <Tag text={difficulty} />
+              <Tag text={mapType} />
+              <Tag text={buildType} />
+            </Stack>
+          </CardContent>
+        </Box>
+      </Card>
+    </Link>
   );
 }
 
