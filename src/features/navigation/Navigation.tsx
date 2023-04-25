@@ -36,7 +36,7 @@ function Navigation({}: Props) {
           {token && (
             <>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-                <Button href="/build/create">Create A Build</Button>
+                <Button href="/builds/create">Create A Build</Button>
               </Box>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
                 <Button onClick={handleLogout}>Logout</Button>

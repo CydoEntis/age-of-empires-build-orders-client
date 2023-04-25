@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "build/create",
+        path: "builds/create",
         element: <CreateBuild />,
       },
       {

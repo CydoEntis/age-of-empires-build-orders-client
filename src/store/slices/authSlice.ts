@@ -24,9 +24,9 @@ export interface AuthState {
   errorMessage: string;
 }
 
-const api_endpoint = `${import.meta.env.VITE_ENDPOINT}`;
+const apiEndpoint = `${import.meta.env.VITE_API_ENDPOINT}`;
 
-const username = localStorage.getItem("user");
+const username = localStorage.getItem("username");
 const token = localStorage.getItem("token");
 
 const initialState: AuthState = {
@@ -35,32 +35,36 @@ const initialState: AuthState = {
   errorMessage: "",
 };
 
+console.log(initialState);
+
 function saveUserDetailsToLocalStorage(username: string, token: string) {
   localStorage.setItem("username", username);
   localStorage.setItem("token", token);
 }
 
-async function getCsrfTokenConfig() {
-  try {
-    const res = await axios(`${api_endpoint}/auth/csrf`);
-    return {
-      headers: {
-        "X-CSRF-TOKEN": res.data.token,
-      },
-    };
-  } catch (error: any) {
-    throw new Error();
-  }
-}
+// export async function getCsrfTokenConfig() {
+//   try {
+//     const res = await axios(`${apiEndpoint}/auth/csrf`);
+//     return {
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json',
+//         "Authorization": "",
+//       },
+//     };
+//   } catch (error: any) {
+//     throw new Error();
+//   }
+// }
 
-// TODO: Clean up axios calls, move url to .env variable.
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (registerDetails: RegisterDetails) => {
     try {
+
       console.log(registerDetails);
       const res = await axios.post(
-        `${api_endpoint}/auth/register`,
+        `${apiEndpoint}/auth/register`,
         registerDetails
       );
 
@@ -77,12 +81,12 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (loginDetails: LoginDetails) => {
     try {
-      let config = await getCsrfTokenConfig();
-      console.log(config);
+      // let config = await getCsrfTokenConfig();
+      // console.log(config);
+      console.log(apiEndpoint + "/auth/login");
       const res = await axios.post(
-        `${api_endpoint}/auth/login`,
+        `${apiEndpoint}/auth/login`,
         loginDetails,
-        config
       );
       saveUserDetailsToLocalStorage(res.data.username, res.data.token);
 
@@ -112,8 +116,6 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.username = action.payload.username;
       state.token = action.payload.token;
-
-      console.log("state: ", state);
     });
   },
 });

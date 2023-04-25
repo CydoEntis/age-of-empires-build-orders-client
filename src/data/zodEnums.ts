@@ -21,3 +21,27 @@ export const buildTypeEnums = [
   "FAST_CASTLE",
   "TIMING_ATTACK",
 ] as const;
+
+// export const civilizationEnums = [
+//   "Abbassid Dynast",
+//   "Chine",
+//   "Delhi Sultanate",
+//   "English",
+//   "French",
+//   "Holy Roman Empire",
+//   "Malians",
+//   "Ottomans",
+//   "Rus",
+// ] as const;
+
+// export const difficultyEnums = ["Easy", "Medium", "Hard"] as const;
+
+// export const mapTypeEnums = ["Open", "Closed", "Hybrid", "Water"] as const;
+
+// export const buildTypeEnums = [
+//   "Cheese",
+//   "Defensive",
+//   "Economic",
+//   "Fast Castle",
+//   "Timing Attack",
+// ] as const;

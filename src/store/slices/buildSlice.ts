@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 export interface Build {
   id?: number;
@@ -17,7 +18,6 @@ export interface Build {
     | "OTTOMANS"
     | "RUS"
     | "";
-
   difficulty: "EASY" | "MEDIUM" | "HARD" | "";
   mapType: "OPEN" | "CLOSED" | "HYBRID" | "WATER" | "";
   buildType:
@@ -27,9 +27,9 @@ export interface Build {
     | "FAST_CASTLE"
     | "TIMING_ATTACK"
     | "";
-  createdBy: string;
-  createdAt: string;
-  updatedAt: string;
+  createdBy?: string;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
 }
 
 export interface BuildWithSteps extends Build {
@@ -60,12 +60,47 @@ const initialState: BuildsState = {
 export const getAllBuilds = createAsyncThunk("/builds", async () => {
   try {
     const res = await axios(`${apiEndpoint}/builds`);
-    // console.log(res.data);
     return res.data;
   } catch (error: any) {
     throw new Error();
   }
 });
+
+export function setHeaders() {
+  return {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+}
+
+export const createBuild = createAsyncThunk(
+  "/builds/create",
+  async (build: BuildWithSteps) => {
+    // let config = {
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+    let config = setHeaders();
+    console.log(config);
+    try {
+      const res = await axios.post(
+        `${apiEndpoint}/builds/create`,
+        build,
+        config
+      );
+      return res.data;
+    } catch (error: any) {
+      throw new Error();
+    }
+  }
+);
+
 const buildsSlice = createSlice({
   name: "builds",
   initialState,
@@ -73,6 +108,9 @@ const buildsSlice = createSlice({
   extraReducers: function (builder) {
     builder.addCase(getAllBuilds.fulfilled, (state, action) => {
       state.builds = action.payload;
+    });
+    builder.addCase(createBuild.fulfilled, (state, action) => {
+      state.builds.push(action.payload);
     });
   },
 });

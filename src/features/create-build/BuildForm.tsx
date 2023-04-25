@@ -1,6 +1,11 @@
-import { Typography, TextField, Stack } from "@mui/material";
+import { Typography, TextField, Stack, Button } from "@mui/material";
 import { ZodType, z } from "zod";
-import { Build, BuildWithSteps, Step } from "../../store/slices/buildSlice";
+import {
+  Build,
+  BuildWithSteps,
+  Step,
+  createBuild,
+} from "../../store/slices/buildSlice";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FromDropdown from "../../components/form/FormDropdown";
@@ -21,21 +26,22 @@ import {
 } from "../../data/zodEnums";
 import BuildStep from "./StepForm";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import FormTextArea from "../../components/form/FormTextArea";
 
-const defaultBuildValues: BuildWithSteps = {
+const defaultBuildValues: Build = {
   name: "",
   description: "",
   civilization: "",
   difficulty: "",
   mapType: "",
   buildType: "",
-  createdBy: "",
-  createdAt: "",
-  updatedAt: "",
-  steps: [],
 };
 
 function BuildForm() {
+  const username = useAppSelector((state) => state.auth.username);
+  const dispatch = useAppDispatch();
+
   const buildSchema: ZodType<Build> = z.object({
     name: z.string().min(5).max(20),
     description: z.string().min(10).max(50),
@@ -43,12 +49,9 @@ function BuildForm() {
     difficulty: z.enum(difficultyEnums),
     mapType: z.enum(mapTypeEnums),
     buildType: z.enum(buildTypeEnums),
-    createdBy: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
   });
 
-  const { handleSubmit, control } = useForm<BuildWithSteps>({
+  const { handleSubmit, control, reset } = useForm<Build>({
     defaultValues: defaultBuildValues,
     resolver: zodResolver(buildSchema),
   });
@@ -60,75 +63,95 @@ function BuildForm() {
   }
 
   function onSubmit(data: Build) {
-    // dispatch(registerUser(data));
+    console.log(data);
+    const newBuild: BuildWithSteps = {
+      ...data,
+      createdBy: username,
+      createdAt: new Date(),
+      steps: steps,
+    };
+
+    dispatch(createBuild(newBuild));
+    reset();
   }
 
   return (
     <>
       <GridItem>
         <Typography variant="h3">Create A New Build</Typography>
-        <FormInput
-          id="buildName"
-          name="name"
-          label="Build Name"
-          control={control}
-          type="text"
-          variant="outlined"
-        />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormInput
+            id="buildName"
+            name="name"
+            label="Build Name"
+            control={control}
+            type="text"
+            variant="outlined"
+          />
+          <FormTextArea
+            name="description"
+            label="Description"
+            control={control}
+            variant="outlined"
+          />
 
-        <TextField
-          multiline
-          rows={4}
-          margin="normal"
-          fullWidth
-          id="description"
-          label="Description"
-          name="description"
-          variant="outlined"
-          onChange={(e) => console.log(e.target.value)}
-        />
-        <Stack
-          direction={{ sm: "column", md: "column", lg: "row" }}
-          spacing={6}
-          gap={2}
-          alignItems="center"
-          justifyContent="center"
-          py={3}
-        >
-          <FromDropdown
-            name="civilization"
-            control={control}
-            label="Select a Civilization"
-            options={civilizations}
-          />
-          <FromDropdown
-            name="difficulty"
-            control={control}
-            label="Select a Difficulty"
-            options={difficulties}
-          />
-        </Stack>
-        <Stack
-          direction={{ sm: "column", md: "column", lg: "row" }}
-          spacing={6}
-          gap={2}
-          alignItems="center"
-          justifyContent="center"
-          py={3}
-        >
-          <FromDropdown
-            name="mapType"
-            control={control}
-            label="Select a Map Type"
-            options={mapTypes}
-          />
-          <FromDropdown
-            name="buildType"
-            control={control}
-            label="Select a Build Type"
-            options={buildTypes}
-          />
-        </Stack>
+          <Stack
+            direction={{ sm: "column", md: "column", lg: "row" }}
+            spacing={6}
+            gap={2}
+            alignItems="center"
+            justifyContent="center"
+            py={3}
+          >
+            <FromDropdown
+              name="civilization"
+              control={control}
+              label="Select a Civilization"
+              options={civilizations}
+            />
+            <FromDropdown
+              name="difficulty"
+              control={control}
+              label="Select a Difficulty"
+              options={difficulties}
+            />
+          </Stack>
+          <Stack
+            direction={{ sm: "column", md: "column", lg: "row" }}
+            spacing={6}
+            gap={2}
+            alignItems="center"
+            justifyContent="center"
+            py={3}
+          >
+            <FromDropdown
+              name="mapType"
+              control={control}
+              label="Select a Map Type"
+              options={mapTypes}
+            />
+            <FromDropdown
+              name="buildType"
+              control={control}
+              label="Select a Build Type"
+              options={buildTypes}
+            />
+          </Stack>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+              display: "block",
+              mt: 1,
+              mb: 1,
+            }}
+          >
+            Create Build
+          </Button>
+        </form>
+
         <Steps steps={steps} isPreview />
         <Typography variant="h6" mt={3}>
           Add A Step

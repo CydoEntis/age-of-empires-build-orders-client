@@ -19,8 +19,7 @@ function LoginForm() {
 
   function onSubmit(data: LoginDetails) {
     dispatch(loginUser(data));
-    console.log("redirecting...")
-    navigate("/")
+    navigate("/builds/create")
   }
 
   return (
