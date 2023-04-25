@@ -6,7 +6,7 @@ type Props = {}
 
 function CreateBuild({}: Props) {
   return (
-    <GridWrapper>
+    <GridWrapper spacing={5} justifyContent='center'>
         <BuildForm />
     </GridWrapper>
   )

@@ -9,6 +9,7 @@ function GridItem({ children }: Props) {
   return (
     <Grid
       component={Paper}
+      elevation={8}
       item
       mt="80px"
       xs={12}

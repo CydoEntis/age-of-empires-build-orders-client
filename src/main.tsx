@@ -106,8 +106,11 @@ const getDesignTokens = (mode: PaletteMode) => ({
             dark: "#c4a24d",
           },
           background: {
-            default: "#10101B",
-            paper: "#191c2b",
+            // default: "#10101B",
+            // paper: "#191c2b",
+            default: "#080B16",
+            paper: "#000519",
+            secondary: "#000519",
           },
           typography: {
             fontFamily: ["Inter", "sans-serif"].join(","),

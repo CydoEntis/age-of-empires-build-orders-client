@@ -45,8 +45,8 @@ function BuildForm() {
   const navigate = useNavigate();
 
   const buildSchema: ZodType<Build> = z.object({
-    title: z.string().min(5).max(20),
-    description: z.string().min(10).max(50),
+    title: z.string().min(5).max(150),
+    description: z.string().min(10).max(250),
     civilization: z.enum(civilizationEnums),
     difficulty: z.enum(difficultyEnums),
     mapType: z.enum(mapTypeEnums),
@@ -66,6 +66,7 @@ function BuildForm() {
   console.log(username);
 
   function onSubmit(data: Build) {
+    console.log("click");
     console.log(data);
     console.log(steps);
     const newBuild: BuildWithSteps = {

@@ -1,12 +1,7 @@
 import { MenuItem, TextField } from "@mui/material";
 import React from "react";
 import { Controller } from "react-hook-form";
-import {
-  BuildType,
-  Civilization,
-  Difficulty,
-  MapType,
-} from "../../features/create-build/BuildForm";
+
 
 interface DropdownOption {
   value: string;
