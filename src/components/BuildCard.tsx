@@ -22,7 +22,7 @@ import RusFlag from "../assets/rus.png";
 import { Build } from "../store/slices/buildSlice";
 
 function BuildCard({
-  name,
+  title,
   description,
   civilization,
   difficulty,
@@ -66,12 +66,12 @@ function BuildCard({
   }
 
   return (
-    <Grid item md={2}>
+    <Grid item md={2} sx={{ minWidth: "350px" }}>
       <Card elevation={8}>
         <CardMedia component="img" height="140" image={image} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {name}
+            {title}
           </Typography>
           <Typography variant="body2">{description}</Typography>
         </CardContent>

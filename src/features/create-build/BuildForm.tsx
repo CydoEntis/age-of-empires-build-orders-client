@@ -28,9 +28,10 @@ import BuildStep from "./StepForm";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import FormTextArea from "../../components/form/FormTextArea";
+import { useNavigate } from "react-router-dom";
 
 const defaultBuildValues: Build = {
-  name: "",
+  title: "",
   description: "",
   civilization: "",
   difficulty: "",
@@ -41,9 +42,10 @@ const defaultBuildValues: Build = {
 function BuildForm() {
   const username = useAppSelector((state) => state.auth.username);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const buildSchema: ZodType<Build> = z.object({
-    name: z.string().min(5).max(20),
+    title: z.string().min(5).max(20),
     description: z.string().min(10).max(50),
     civilization: z.enum(civilizationEnums),
     difficulty: z.enum(difficultyEnums),
@@ -61,18 +63,21 @@ function BuildForm() {
   function handleSteps(data: Step) {
     setSteps((prevSteps) => [...prevSteps, data]);
   }
+  console.log(username);
 
   function onSubmit(data: Build) {
     console.log(data);
+    console.log(steps);
     const newBuild: BuildWithSteps = {
       ...data,
       createdBy: username,
-      createdAt: new Date(),
+      createdDate: new Date(),
       steps: steps,
     };
-
+    console.log(newBuild);
     dispatch(createBuild(newBuild));
     reset();
+    navigate("/");
   }
 
   return (
@@ -81,8 +86,8 @@ function BuildForm() {
         <Typography variant="h3">Create A New Build</Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormInput
-            id="buildName"
-            name="name"
+            id="title"
+            name="title"
             label="Build Name"
             control={control}
             type="text"

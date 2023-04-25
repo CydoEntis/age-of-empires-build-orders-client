@@ -35,7 +35,6 @@ const initialState: AuthState = {
   errorMessage: "",
 };
 
-console.log(initialState);
 
 function saveUserDetailsToLocalStorage(username: string, token: string) {
   localStorage.setItem("username", username);

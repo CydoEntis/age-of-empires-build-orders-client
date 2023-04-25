@@ -4,7 +4,7 @@ import { useAppSelector } from "../../hooks/reduxHooks";
 
 export interface Build {
   id?: number;
-  name: string;
+  title: string;
   description: string;
   civilization:
     | "ABBASID_DYNASTY"
@@ -28,8 +28,8 @@ export interface Build {
     | "TIMING_ATTACK"
     | "";
   createdBy?: string;
-  createdAt?: Date | null;
-  updatedAt?: Date | null;
+  createdDate?: Date | null;
+  updatedDate?: Date | null;
 }
 
 export interface BuildWithSteps extends Build {
@@ -51,7 +51,6 @@ export interface BuildsState {
 }
 
 const apiEndpoint = `${import.meta.env.VITE_API_ENDPOINT}`;
-console.log(apiEndpoint);
 
 const initialState: BuildsState = {
   builds: [],
@@ -79,6 +78,7 @@ export function setHeaders() {
 export const createBuild = createAsyncThunk(
   "/builds/create",
   async (build: BuildWithSteps) => {
+    console.log("clicked")
     // let config = {
     //   headers: {
     //     Authorization: `Bearer ${localStorage.getItem("token")}`,
