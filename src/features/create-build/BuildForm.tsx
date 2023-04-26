@@ -68,22 +68,24 @@ function BuildForm() {
 
   const [steps, setSteps] = useState<Step[]>([]);
 
-  function handleSteps(data: Step) {
+  function addStep(data: Step) {
     setSteps((prevSteps) => [...prevSteps, data]);
   }
-  console.log(username);
+
+  function deleteStep(id: number | undefined) {
+    console.log("ID:", id);
+    console.log(steps);
+    const updatedSteps = steps.filter((step, index) => index !== id);
+    setSteps(updatedSteps);
+  }
 
   function onSubmit(data: Build) {
-    console.log("click");
-    console.log(data);
-    console.log(steps);
     const newBuild: BuildWithSteps = {
       ...data,
       createdBy: username,
       createdDate: new Date(),
       steps: steps,
     };
-    console.log(newBuild);
     dispatch(createBuild(newBuild));
     reset();
     navigate("/");
@@ -179,7 +181,7 @@ function BuildForm() {
             Create Build
           </Button>
         </form>
-        <StepForm handleSteps={handleSteps} />
+        <StepForm addStep={addStep} />
       </Grid>
       <Grid
         m={2}
@@ -195,7 +197,9 @@ function BuildForm() {
         sx={{ borderRadius: ".4rem" }}
       >
         {steps.length <= 0 && <StepsNotFound />}
-        {steps.length > 0 && <Steps steps={steps} isPreview />}
+        {steps.length > 0 && (
+          <Steps steps={steps} deleteStep={deleteStep} isPreview />
+        )}
       </Grid>
     </Grid>
   );

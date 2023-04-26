@@ -17,10 +17,11 @@ import FormInput from "../../components/form/FormInput";
 import GridItem from "../../components/grid/GridItem";
 
 type Props = {
-  handleSteps: (data: Step) => void;
+  addStep: (data: Step) => void;
 };
 
 const defaultStepValues: Step = {
+  id: undefined,
   villagers: 0,
   step: "",
   food: 0,
@@ -29,7 +30,7 @@ const defaultStepValues: Step = {
   stone: 0,
 };
 
-function StepForm({ handleSteps }: Props) {
+function StepForm({ addStep }: Props) {
   const stepSchema: ZodType<Step> = z.object({
     villagers: z.number().min(0).max(200).nonnegative(),
     step: z
@@ -48,7 +49,7 @@ function StepForm({ handleSteps }: Props) {
   });
 
   function submitForm(data: Step) {
-    handleSteps(data);
+    addStep(data);
     reset();
   }
 

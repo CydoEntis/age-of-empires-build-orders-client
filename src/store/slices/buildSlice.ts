@@ -37,7 +37,7 @@ export interface BuildWithSteps extends Build {
 }
 
 export interface Step {
-  id?: string;
+  id?: number;
   villagers: number;
   step: string;
   food: number;

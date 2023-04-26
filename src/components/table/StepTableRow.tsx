@@ -5,6 +5,7 @@ import { alignProperty } from "@mui/material/styles/cssUtils";
 import { BsFillTrashFill } from "react-icons/bs";
 
 type Props = {
+  id: number | undefined;
   villagers: number;
   food: number;
   wood: number;
@@ -12,9 +13,11 @@ type Props = {
   stone: number;
   step: string;
   isPreview?: boolean;
+  deleteStep: (id: number | undefined) => void;
 };
 
 function StepTableRow({
+  id,
   villagers,
   food,
   wood,
@@ -22,7 +25,9 @@ function StepTableRow({
   stone,
   step,
   isPreview,
+  deleteStep
 }: Props) {
+  console.log(id)
   return (
     <TableRow
       sx={{
@@ -37,7 +42,7 @@ function StepTableRow({
       <StepTableCell item={step}  />
       {isPreview && (
         <TableCell>
-            <BsFillTrashFill fontSize="1.5rem" color="#ff6161"/>
+            <BsFillTrashFill onClick={() => deleteStep(id)} fontSize="1.5rem" color="#ff6161"/>
         </TableCell>
       )}
     </TableRow>
