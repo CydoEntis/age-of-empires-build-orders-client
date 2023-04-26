@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Icon, Paper } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -7,31 +7,43 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { logoutUser } from "../../store/slices/authSlice";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { NavLink } from "react-router-dom";
 
-type Props = {};
+type Props = {
+  token: string;
+  toggleNav: () => void;
+  handleLogout: () => void;
+};
 
-function Navigation({}: Props) {
-  const dispatch = useAppDispatch();
-  const token = useAppSelector((state) => state.auth.token);
-
-  function handleLogout() {
-    dispatch(logoutUser());
-  }
-
+function Navigation({ token, toggleNav, handleLogout }: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar color="secondary">
         <Toolbar>
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
+          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
             BuildBuddy
           </Typography>
+          <Icon
+            sx={{ display: { xs: "block", sm: "none" } }}
+            onClick={toggleNav}
+          >
+            <HiOutlineMenuAlt3 fontSize="1.5rem" color="#e9c56a" />
+          </Icon>
 
           <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-            <Button href="/">Builds</Button>
+            <Button
+              sx={{
+                "&:active": {
+                  color: "purple",
+                  background: "orange",
+                },
+              }}
+              component={NavLink}
+              to="/"
+            >
+              Builds
+            </Button>
           </Box>
           {token && (
             <>

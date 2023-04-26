@@ -22,6 +22,7 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import CreateBuild from "./pages/CreateBuildPage";
 import BuildPage from "./pages/BuildPage";
+import ScrollToTop from "./components/util/ScrollToTop";
 
 const router = createBrowserRouter([
   {

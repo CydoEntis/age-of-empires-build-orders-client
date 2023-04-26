@@ -9,7 +9,7 @@ type Props = {
 
 function Builds({builds}: Props) {
   return (
-    <Grid item xs={12} sm={12} md={12} lg={8} xl={8} py={5} px={2} order={{xs: 2, sm: 2, md: 2, lg: 1}}>
+    <Grid item xs={12} sm={12} md={12} lg={8} xl={8} py={5} px={2} >
       <Stack spacing={3}>
         {builds &&
           builds.map((build) => (

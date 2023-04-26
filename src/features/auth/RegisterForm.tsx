@@ -13,6 +13,7 @@ import { RegisterDetails, registerUser } from "../../store/slices/authSlice";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { ZodType, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { NavLink } from "react-router-dom";
 
 const defaultValues: RegisterDetails = {
   email: "",
@@ -46,70 +47,79 @@ function RegisterForm() {
   }
 
   return (
-    <Grid component={Paper} item md={6}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        p={10}
-      >
-        <Box>
-          <Typography variant="h3">Create an Account</Typography>
-          <Typography>Start creating your build orders</Typography>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
-              id="email"
-              label="Email"
-              type="email"
-              name="email"
-              control={control}
-              variant="standard"
-            />
-            <FormInput
-              id="username"
-              label="Username"
-              type="text"
-              name="username"
-              control={control}
-              variant="standard"
-            />
-            <FormInput
-              id="password"
-              label="Password"
-              type="password"
-              name="password"
-              control={control}
-              variant="standard"
-            />
-            <FormInput
-              id="confirmPassword"
-              label="Confrim Password"
-              type="password"
-              name="confirmPassword"
-              control={control}
-              variant="standard"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-          </form>
+    <Grid
+      item
+      xs={12}
+      sm={12}
+      md={12}
+      lg={4}
+      xl={4}
+      py={5}
+      px={2}
+      order={{ xs: 2, sm: 2, md: 2, lg: 1 }}
+      component={Paper}
+      elevation={8}
+      sx={{
+        height: { xs: "100vh", sm: "650px", lg: "750px" },
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: { md: "0 .4rem .4rem 0" },
+      }}
+    >
+      <Box>
+        <Typography variant="h3">Create an Account</Typography>
+        <Typography>Start creating your build orders</Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormInput
+            id="email"
+            label="Email"
+            type="email"
+            name="email"
+            control={control}
+            variant="standard"
+          />
+          <FormInput
+            id="username"
+            label="Username"
+            type="text"
+            name="username"
+            control={control}
+            variant="standard"
+          />
+          <FormInput
+            id="password"
+            label="Password"
+            type="password"
+            name="password"
+            control={control}
+            variant="standard"
+          />
+          <FormInput
+            id="confirmPassword"
+            label="Confrim Password"
+            type="password"
+            name="confirmPassword"
+            control={control}
+            variant="standard"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+        </form>
 
-          <Grid container>
-            <Grid item>
-              <Link href="/login" variant="body2">
-                {"Already have an account? Log in!"}
-              </Link>
-            </Grid>
+        <Grid container>
+          <Grid item>
+            <Link component={NavLink} to="/login" variant="body2">
+              {"Already have an account? Log in!"}
+            </Link>
           </Grid>
-        </Box>
+        </Grid>
       </Box>
     </Grid>
   );
