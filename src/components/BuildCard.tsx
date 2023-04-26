@@ -78,7 +78,7 @@ function BuildCard({
         component={Paper}
         sx={{ display: "flex", flexDirection: {xs: "column", sm: "row" }, borderRadius: ".2rem", marginBotton: "6px" }}
       >
-        <Box sx={{ width: {xs: "100", sm: "230px" }, position: "relative" }}>
+        <Box sx={{ width: {xs: "100%", sm: "300px" }, position: "relative" }}>
           <Box
             className="img-overlay"
             sx={{

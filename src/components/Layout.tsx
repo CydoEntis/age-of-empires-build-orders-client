@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/system";
 import { Outlet } from "react-router-dom";
 import Navigation from "../features/navigation/Navigation";
+import MobileNav from "../features/navigation/MobileNav";
 
 type Props = {};
 
@@ -18,6 +19,7 @@ function Layout({}: Props) {
   return (
     <>
         <Navigation />
+        <MobileNav />
         <main className="">
           <Outlet />
         </main>
