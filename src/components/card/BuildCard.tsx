@@ -1,28 +1,23 @@
 import {
   CardContent,
   Typography,
-  CardActions,
-  Button,
-  Grid,
-  Chip,
   Stack,
   Box,
   Paper,
 } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import AbbasidFlag from "../assets/abbasid.png";
-import ChineseFlag from "../assets/chinese.png";
-import EnglishFlag from "../assets/english.png";
-import DehliFlag from "../assets/dehli.png";
-import HreFlag from "../assets/hre.png";
-import FrenchFlag from "../assets/french.png";
-import MalianFlag from "../assets/malian.png";
-import MongolFlag from "../assets/mongol.png";
-import OttomanFlag from "../assets/ottoman.png";
-import RusFlag from "../assets/rus.png";
-import { Build } from "../store/slices/buildSlice";
-import Tag from "./tag/Tag";
+import AbbasidFlag from "../../assets/abbasid.png";
+import ChineseFlag from "../../assets/chinese.png";
+import EnglishFlag from "../../assets/english.png";
+import DehliFlag from "../../assets/dehli.png";
+import HreFlag from "../../assets/hre.png";
+import FrenchFlag from "../../assets/french.png";
+import MalianFlag from "../../assets/malian.png";
+import MongolFlag from "../../assets/mongol.png";
+import OttomanFlag from "../../assets/ottoman.png";
+import RusFlag from "../../assets/rus.png";
+import { Build } from "../../store/slices/buildSlice";
+import Tag from "../tag/Tag";
 import { Link } from "react-router-dom";
 
 function BuildCard({

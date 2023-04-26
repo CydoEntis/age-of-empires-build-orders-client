@@ -1,6 +1,6 @@
 import React from "react";
 import { BuildWithSteps } from "../../store/slices/buildSlice";
-import BuildCard from "../../components/BuildCard";
+import BuildCard from "../../components/card/BuildCard";
 import GridItem from "../../components/grid/GridItem";
 import Steps from "./Steps";
 import { Box, Grid, Paper, Stack } from "@mui/material";

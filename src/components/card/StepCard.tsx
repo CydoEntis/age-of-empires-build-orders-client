@@ -13,11 +13,11 @@ import {
 } from "@mui/material";
 import EnglishFlag from "../assets/english.png";
 import React from "react";
-import GridItem from "./grid/GridItem";
+import GridItem from "../grid/GridItem";
 import BuildCard from "./BuildCard";
-import { BuildWithSteps } from "../store/slices/buildSlice";
-import BuildSteps from "../features/builds/BuildSteps";
-import Steps from "../features/builds/Steps";
+import { BuildWithSteps } from "../../store/slices/buildSlice";
+import BuildSteps from "../../features/builds/BuildSteps";
+import Steps from "../../features/builds/Steps";
 
 type Props = {
   build: BuildWithSteps

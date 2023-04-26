@@ -1,7 +1,7 @@
 import { Grid, Stack } from "@mui/material";
 import React from "react";
 import { Build } from "../../store/slices/buildSlice";
-import BuildCard from "../../components/BuildCard";
+import BuildCard from "../../components/card/BuildCard";
 
 type Props = {
     builds: Build[];

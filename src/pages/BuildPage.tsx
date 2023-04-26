@@ -5,7 +5,7 @@ import {
   Paper,
   TableContainer,
 } from "@mui/material";
-import StepCard from "../components/StepCard";
+import StepCard from "../components/card/StepCard";
 import { makeStyles } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";

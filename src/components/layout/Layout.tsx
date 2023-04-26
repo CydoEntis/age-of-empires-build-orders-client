@@ -1,11 +1,11 @@
 import { createTheme, ThemeProvider } from "@mui/system";
 import { Outlet, useNavigate } from "react-router-dom";
-import Navigation from "../features/navigation/Navigation";
-import MobileNav from "../features/navigation/MobileNav";
+import Navigation from "../../features/navigation/Navigation";
+import MobileNav from "../../features/navigation/MobileNav";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import { logoutUser } from "../store/slices/authSlice";
-import ScrollToTop from "./util/ScrollToTop";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { logoutUser } from "../../store/slices/authSlice";
+import ScrollToTop from "../util/ScrollToTop";
 
 type Props = {};
 
