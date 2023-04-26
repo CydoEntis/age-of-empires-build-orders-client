@@ -47,7 +47,7 @@ function BuildFilter() {
   });
 
   return (
-    <Grid item xs={12} sm={12} lg={4} xl={4} py={5} px={2}>
+    <Grid item xs={12} sm={12} lg={4} xl={4} py={5} px={2} order={{xs: 1, sm: 1, md: 1, lg: 2}}>
       <Box elevation={8} component={Paper} sx={{ borderRadius: ".2rem" }} p={3}>
         <form>
           <Stack spacing={2}>

@@ -9,7 +9,6 @@ import {
   Grid,
 } from "@mui/material";
 import React, { useState } from "react";
-import GridItem from "../../components/grid/GridItem";
 import StepTableHead from "../../components/table/StepTableHead";
 import StepTableBody from "../../components/table/StepTableBody";
 import StepTableRow from "../../components/table/StepTableRow";
@@ -17,7 +16,7 @@ import { Step } from "../../store/slices/buildSlice";
 
 type Props = {
   steps: Step[];
-  deleteStep: (id: number | undefined) => void;
+  deleteStep?: (id: number | undefined) => void;
   isPreview?: boolean;
 };
 

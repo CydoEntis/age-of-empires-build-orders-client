@@ -26,9 +26,9 @@ function BuildPage({}: Props) {
   const build = useAppSelector((state) => state.builds.build);
   const { buildId } = useParams();
   useEffect(() => {
-    dispatch(getBuildById(buildId!));
+    dispatch(getBuildById(Number(buildId!)));
   }, []);
-
+  console.log(build);
   return (
     <BaseContainer>
         {build && <Build build={build} />}

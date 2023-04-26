@@ -9,7 +9,7 @@ function Tag({ text }: Props) {
   return (
     <Chip
       label={text}
-      sx={{ borderRadius: ".2rem", textTransform: "capitalize" }}
+      sx={{ margin: "3px", borderRadius: ".2rem", textTransform: "capitalize" }}
     />
   );
 }

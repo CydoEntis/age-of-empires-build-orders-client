@@ -13,7 +13,7 @@ type Props = {
   stone: number;
   step: string;
   isPreview?: boolean;
-  deleteStep: (id: number | undefined) => void;
+  deleteStep?: (id: number | undefined) => void;
 };
 
 function StepTableRow({

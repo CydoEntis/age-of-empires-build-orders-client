@@ -21,9 +21,10 @@ function Build({ build }: Props) {
           difficulty={build.difficulty}
           mapType={build.mapType}
           buildType={build.buildType}
+          createdBy={build.createdBy}
         />
         <Box component={Paper} elevation={8} p={5} sx={{borderRadius: ".2rem"}}>
-          <Steps steps={build.steps} />
+          <Steps steps={build.steps} isPreview={false}/>
         </Box>
       </Stack>
     </Box>

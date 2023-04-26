@@ -28,6 +28,7 @@ import { Link } from "react-router-dom";
 function BuildCard({
   id,
   title,
+  description,
   createdBy,
   civilization,
   difficulty,
@@ -75,9 +76,9 @@ function BuildCard({
       <Card
         elevation={8}
         component={Paper}
-        sx={{ display: "flex", borderRadius: ".2rem", marginBotton: "6px" }}
+        sx={{ display: "flex", flexDirection: {xs: "column", sm: "row" }, borderRadius: ".2rem", marginBotton: "6px" }}
       >
-        <Box sx={{ width: "230px", position: "relative" }}>
+        <Box sx={{ width: {xs: "100", sm: "230px" }, position: "relative" }}>
           <Box
             className="img-overlay"
             sx={{
@@ -103,10 +104,17 @@ function BuildCard({
           }}
         >
           <CardContent>
-            <Typography variant="h5" component="div" mb={2}>
+            <Typography variant="h5" >
               {title}
             </Typography>
-            <Stack direction="row" spacing={1}>
+            {
+              description && (
+                <Typography variant="subtitle1"  mb={2}>
+                {description}
+              </Typography>
+              )
+            }
+            <Stack direction="row" flexWrap="wrap"  >
               <Tag text={createdBy} />
               <Tag text={difficulty} />
               <Tag text={mapType} />

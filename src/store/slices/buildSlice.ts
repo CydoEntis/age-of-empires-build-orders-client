@@ -67,7 +67,7 @@ export const getAllBuilds = createAsyncThunk("/builds", async () => {
   }
 });
 
-export const getBuildById = createAsyncThunk("builds/id", async(id: string) => {
+export const getBuildById = createAsyncThunk("builds/id", async(id: number) => {
   try {
     const res = await axios(`${apiEndpoint}/builds/${id}`);
     return res.data;
