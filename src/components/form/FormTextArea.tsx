@@ -30,6 +30,7 @@ function FormTextArea({ name, control, id, label, variant }: Props) {
           name={name}
           variant={variant}
           onChange={onChange}
+          value={value}
         />
       )}
     />

@@ -6,7 +6,7 @@ type Props = { children: React.ReactNode };
 function BaseContainer({ children }: Props) {
   return (
     <Box
-      width={{ xs: "100%", sm: "95%", md: "90%", lg: "85%", xl: "65%" }}
+      width={{ xs: "100%", sm: "95%", md: "95%", lg: "95%", xl: "65%" }}
       sx={{ margin: "120px auto" }}
     >
       {children}

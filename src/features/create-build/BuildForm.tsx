@@ -35,22 +35,43 @@ import StepForm from "./StepForm";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import FormTextArea from "../../components/form/FormTextArea";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import StepsNotFound from "../../components/not-found/StepsNotFound";
 
-const defaultBuildValues: Build = {
-  title: "",
-  description: "",
-  civilization: "",
-  difficulty: "",
-  mapType: "",
-  buildType: "",
+type Props = {
+  build?: BuildWithSteps;
+  edit?: boolean;
 };
 
-function BuildForm() {
+function BuildForm({ build, edit }: Props) {
   const username = useAppSelector((state) => state.auth.username);
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const navigate = useNavigate();
+  const [steps, setSteps] = useState<Step[]>(edit ? build!.steps : []);
+  console.log(steps);
+  let defaultBuildValues: Build;
+  if (edit) {
+    defaultBuildValues = {
+      title: build!.title,
+      description: build!.description,
+      civilization: build!.civilization,
+      difficulty: build!.difficulty,
+      mapType: build!.mapType,
+      buildType: build!.buildType,
+    };
+    // console.log(build!.steps);
+    // setSteps(build!.steps);
+  } else {
+    defaultBuildValues = {
+      title: "",
+      description: "",
+      civilization: "",
+      difficulty: "",
+      mapType: "",
+      buildType: "",
+    };
+  }
 
   const buildSchema: ZodType<Build> = z.object({
     title: z.string().min(5).max(150),
@@ -66,15 +87,11 @@ function BuildForm() {
     resolver: zodResolver(buildSchema),
   });
 
-  const [steps, setSteps] = useState<Step[]>([]);
-
   function addStep(data: Step) {
     setSteps((prevSteps) => [...prevSteps, data]);
   }
 
   function deleteStep(id: number | undefined) {
-    console.log("ID:", id);
-    console.log(steps);
     const updatedSteps = steps.filter((step, index) => index !== id);
     setSteps(updatedSteps);
   }
@@ -92,9 +109,10 @@ function BuildForm() {
   }
 
   return (
-    <Grid container sx={{ margin: "0 auto" }} spacing={{ md: 3 }}>
+    <Grid container sx={{ justifyContent: "center" }} >
       <Grid
-        m={2}
+        mb={{xs: 2, sm: 2, md: 3, lg: 0}}
+        mr={{ lg: 3}}
         component={Paper}
         elevation={8}
         item
@@ -184,12 +202,13 @@ function BuildForm() {
         <StepForm addStep={addStep} />
       </Grid>
       <Grid
-        m={2}
+        // m={2}
         component={Paper}
         elevation={8}
         item
         xs={12}
         sm={12}
+        md={12}
         lg={6}
         xl={6}
         py={5}
