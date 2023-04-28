@@ -44,6 +44,7 @@ export interface Step {
   wood: number;
   gold: number;
   stone: number;
+  build: Build;
 }
 
 export interface BuildsState {
@@ -55,26 +56,29 @@ const apiEndpoint = `${import.meta.env.VITE_API_ENDPOINT}`;
 
 const initialState: BuildsState = {
   builds: [],
-  build: null
+  build: null,
 };
 
 export const getAllBuilds = createAsyncThunk("/builds", async () => {
   try {
-    const res = await axios(`${apiEndpoint}/builds`);
+    const res = await axios(`${apiEndpoint}/builds/all`);
     return res.data;
   } catch (error: any) {
     throw new Error();
   }
 });
 
-export const getBuildById = createAsyncThunk("builds/id", async(id: number) => {
-  try {
-    const res = await axios(`${apiEndpoint}/builds/${id}`);
-    return res.data;
-  } catch (error: any) {
-    throw new Error();
+export const getBuildById = createAsyncThunk(
+  "builds/id",
+  async (id: number) => {
+    try {
+      const res = await axios(`${apiEndpoint}/builds/${id}`);
+      return res.data;
+    } catch (error: any) {
+      throw new Error();
+    }
   }
-})
+);
 
 export function setHeaders() {
   return {
@@ -86,19 +90,29 @@ export function setHeaders() {
   };
 }
 
+export const getMyBuilds = createAsyncThunk(
+  "/builds/user",
+  async (username: string) => {
+    let config = setHeaders();
+    console.log(`${apiEndpoint}/builds/${username}`);
+    try {
+      const res = await axios.get(`${apiEndpoint}/builds`, {
+        params: {
+          username,
+        },
+        headers: config.headers,
+      });
+      return res.data;
+    } catch (error: any) {
+      throw new Error();
+    }
+  }
+);
+
 export const createBuild = createAsyncThunk(
   "/builds/create",
   async (build: BuildWithSteps) => {
-    console.log("clicked")
-    // let config = {
-    //   headers: {
-    //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    // };
     let config = setHeaders();
-    console.log(config);
     try {
       const res = await axios.post(
         `${apiEndpoint}/builds/create`,
@@ -125,7 +139,10 @@ const buildsSlice = createSlice({
     });
     builder.addCase(getBuildById.fulfilled, (state, action) => {
       state.build = action.payload;
-    })
+    });
+    builder.addCase(getMyBuilds.fulfilled, (state, action) => {
+      state.builds = action.payload;
+    });
   },
 });
 

@@ -5,7 +5,7 @@ import BaseContainer from "../components/layout/BaseContainer";
 
 type Props = {};
 
-function CreateBuildPage({}: Props) {
+function EditBuildPage({}: Props) {
   return (
     <BaseContainer>
       <BuildForm />
@@ -13,4 +13,4 @@ function CreateBuildPage({}: Props) {
   );
 }
 
-export default CreateBuildPage;
+export default EditBuildPage;

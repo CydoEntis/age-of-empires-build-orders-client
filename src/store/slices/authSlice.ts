@@ -41,21 +41,6 @@ function saveUserDetailsToLocalStorage(username: string, token: string) {
   localStorage.setItem("token", token);
 }
 
-// export async function getCsrfTokenConfig() {
-//   try {
-//     const res = await axios(`${apiEndpoint}/auth/csrf`);
-//     return {
-//       headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//         "Authorization": "",
-//       },
-//     };
-//   } catch (error: any) {
-//     throw new Error();
-//   }
-// }
-
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (registerDetails: RegisterDetails) => {

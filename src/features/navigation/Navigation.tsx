@@ -17,6 +17,7 @@ type Props = {
 };
 
 function Navigation({ token, toggleNav, handleLogout }: Props) {
+  const username = useAppSelector(state => state.auth.username);
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar color="secondary">
@@ -48,7 +49,10 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
           {token && (
             <>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-                <Button href="/builds/create">Create A Build</Button>
+                <Button component={NavLink} to="/builds/create">Create A Build</Button>
+              </Box>
+              <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
+                <Button component={NavLink} to={`/builds/?username=${username}`} >My Builds</Button>
               </Box>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
                 <Button onClick={handleLogout}>Logout</Button>
@@ -58,7 +62,7 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
           {!token && (
             <>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-                <Button href="/login" variant="contained">
+                <Button component={NavLink} to="/login" variant="contained">
                   Login
                 </Button>
               </Box>
