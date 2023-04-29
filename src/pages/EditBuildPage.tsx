@@ -14,11 +14,8 @@ function EditBuildPage({}: Props) {
   const { buildId } = useParams();
 
   useEffect(() => {
-    console.log(buildId);
     dispatch(getBuildById(Number(buildId!)));
   }, []);
-  console.log(build);
-  console.log(build?.steps);
   return (
     <BaseContainer>{build && <BuildForm build={build!} edit />}</BaseContainer>
   );

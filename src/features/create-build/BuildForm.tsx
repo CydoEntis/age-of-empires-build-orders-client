@@ -12,6 +12,8 @@ import {
   BuildWithSteps,
   Step,
   createBuild,
+  deleteStep,
+  editBuild,
 } from "../../store/slices/buildSlice";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +37,7 @@ import StepForm from "./StepForm";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import FormTextArea from "../../components/form/FormTextArea";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import StepsNotFound from "../../components/not-found/StepsNotFound";
 
 type Props = {
@@ -46,10 +48,10 @@ type Props = {
 function BuildForm({ build, edit }: Props) {
   const username = useAppSelector((state) => state.auth.username);
   const dispatch = useAppDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
+  const { buildId } = useParams();
+
   const [steps, setSteps] = useState<Step[]>(edit ? build!.steps : []);
-  console.log(steps);
   let defaultBuildValues: Build;
   if (edit) {
     defaultBuildValues = {
@@ -91,28 +93,40 @@ function BuildForm({ build, edit }: Props) {
     setSteps((prevSteps) => [...prevSteps, data]);
   }
 
-  function deleteStep(id: number | undefined) {
-    const updatedSteps = steps.filter((step, index) => index !== id);
-    setSteps(updatedSteps);
+  function removeStep(id: number | string) {
+    if (edit) {
+      dispatch(deleteStep(id));
+      const updatedSteps = steps.filter((step) => step.id !== id);
+      setSteps(updatedSteps);
+    } else {
+      const updatedSteps = steps.filter((step) => step.id !== id);
+      setSteps(updatedSteps);
+    }
   }
 
   function onSubmit(data: Build) {
-    const newBuild: BuildWithSteps = {
+    const build: BuildWithSteps = {
       ...data,
       createdBy: username,
       createdDate: new Date(),
       steps: steps,
     };
-    dispatch(createBuild(newBuild));
+    if (edit) {
+      build.id = Number(buildId);
+      console.log(build);
+      dispatch(editBuild(build));
+    } else {
+      dispatch(createBuild(build));
+    }
     reset();
     navigate("/");
   }
 
   return (
-    <Grid container sx={{ justifyContent: "center" }} >
+    <Grid container sx={{ justifyContent: "center" }}>
       <Grid
-        mb={{xs: 2, sm: 2, md: 3, lg: 0}}
-        mr={{ lg: 3}}
+        mb={{ xs: 2, sm: 2, md: 3, lg: 0 }}
+        mr={{ lg: 3 }}
         component={Paper}
         elevation={8}
         item
@@ -196,7 +210,7 @@ function BuildForm({ build, edit }: Props) {
               mb: 1,
             }}
           >
-            Create Build
+            {edit ? "Update Build" : "Create Build"}
           </Button>
         </form>
         <StepForm addStep={addStep} />
@@ -217,7 +231,7 @@ function BuildForm({ build, edit }: Props) {
       >
         {steps.length <= 0 && <StepsNotFound />}
         {steps.length > 0 && (
-          <Steps steps={steps} deleteStep={deleteStep} isPreview />
+          <Steps steps={steps} deleteStep={removeStep} isPreview />
         )}
       </Grid>
     </Grid>

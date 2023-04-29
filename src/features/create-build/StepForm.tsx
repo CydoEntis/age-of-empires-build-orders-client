@@ -15,13 +15,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormInput from "../../components/form/FormInput";
 import GridItem from "../../components/grid/GridItem";
+import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   addStep: (data: Step) => void;
 };
 
+
 const defaultStepValues: Step = {
-  id: undefined,
   villagers: 0,
   step: "",
   food: 0,
@@ -49,79 +50,82 @@ function StepForm({ addStep }: Props) {
   });
 
   function submitForm(data: Step) {
-    addStep(data);
+    addStep({
+      ...data,
+      id: Math.floor(Math.random() * (10000 - 1 + 1) + 10000),
+    });
     reset();
   }
 
   return (
-      <form onSubmit={handleSubmit(submitForm)}>
-        <Typography variant="h6" mt={3}>
-          Add A Step
-        </Typography>
-        <Stack direction={{ xs: "column", sm: "row"}} gap={5}>
-          <FormInput
-            id="villagers"
-            name="villagers"
-            label="Villagers"
-            control={control}
-            type="number"
-            variant="standard"
-          />
-          <FormInput
-            id="food"
-            name="food"
-            label="Food"
-            control={control}
-            type="number"
-            variant="standard"
-          />
-          <FormInput
-            id="wood"
-            name="wood"
-            label="Wood"
-            control={control}
-            type="number"
-            variant="standard"
-          />
-          <FormInput
-            id="gold"
-            name="gold"
-            label="Gold"
-            control={control}
-            type="number"
-            variant="standard"
-          />
-          <FormInput
-            id="stone"
-            name="stone"
-            label="Stone"
-            control={control}
-            type="number"
-            variant="standard"
-          />
-        </Stack>
+    <form onSubmit={handleSubmit(submitForm)}>
+      <Typography variant="h6" mt={3}>
+        Add A Step
+      </Typography>
+      <Stack direction={{ xs: "column", sm: "row" }} gap={5}>
         <FormInput
-          id="step"
-          name="step"
-          label="Step"
+          id="villagers"
+          name="villagers"
+          label="Villagers"
           control={control}
-          type="text"
+          type="number"
           variant="standard"
         />
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            display: "block",
-            mt: 1,
-            mb: 1,
-          }}
-        >
-          Add a Step
-        </Button>
-      </form>
+        <FormInput
+          id="food"
+          name="food"
+          label="Food"
+          control={control}
+          type="number"
+          variant="standard"
+        />
+        <FormInput
+          id="wood"
+          name="wood"
+          label="Wood"
+          control={control}
+          type="number"
+          variant="standard"
+        />
+        <FormInput
+          id="gold"
+          name="gold"
+          label="Gold"
+          control={control}
+          type="number"
+          variant="standard"
+        />
+        <FormInput
+          id="stone"
+          name="stone"
+          label="Stone"
+          control={control}
+          type="number"
+          variant="standard"
+        />
+      </Stack>
+      <FormInput
+        id="step"
+        name="step"
+        label="Step"
+        control={control}
+        type="text"
+        variant="standard"
+      />
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          display: "block",
+          mt: 1,
+          mb: 1,
+        }}
+      >
+        Add a Step
+      </Button>
+    </form>
   );
 }
 

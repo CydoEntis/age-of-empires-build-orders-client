@@ -44,7 +44,6 @@ export interface Step {
   wood: number;
   gold: number;
   stone: number;
-  build: Build;
 }
 
 export interface BuildsState {
@@ -113,6 +112,7 @@ export const createBuild = createAsyncThunk(
   "/builds/create",
   async (build: BuildWithSteps) => {
     let config = setHeaders();
+    console.log(build);
     try {
       const res = await axios.post(
         `${apiEndpoint}/builds/create`,
@@ -126,6 +126,38 @@ export const createBuild = createAsyncThunk(
   }
 );
 
+export const deleteStep = createAsyncThunk(
+  "/builds/delete",
+  async (id: number | string ) => {
+    let config = setHeaders();
+    console.log(id);
+    try {
+      const res = await axios.delete(`${apiEndpoint}/steps/delete/${id}`, config);
+      return res.data;
+    } catch (error: any) {
+      throw new Error();
+    }
+  }
+);
+
+export const editBuild = createAsyncThunk(
+  "/builds/edit",
+  async (build: BuildWithSteps) => {
+    console.log(build);
+    let config = setHeaders();
+    try {
+      const res = await axios.put(
+        `${apiEndpoint}/builds/edit/${build.id}`,
+        build,
+        config
+      );
+      return res.data;
+    } catch (error: any) {
+      console.error(error);
+    }
+  }
+);
+
 const buildsSlice = createSlice({
   name: "builds",
   initialState,
@@ -135,7 +167,7 @@ const buildsSlice = createSlice({
       state.builds = action.payload;
     });
     builder.addCase(createBuild.fulfilled, (state, action) => {
-      state.builds.push(action.payload);
+      // state.builds.push(action.payload);
     });
     builder.addCase(getBuildById.fulfilled, (state, action) => {
       state.build = action.payload;
@@ -143,6 +175,7 @@ const buildsSlice = createSlice({
     builder.addCase(getMyBuilds.fulfilled, (state, action) => {
       state.builds = action.payload;
     });
+    builder.addCase(deleteStep.fulfilled, (state, action) => {});
   },
 });
 

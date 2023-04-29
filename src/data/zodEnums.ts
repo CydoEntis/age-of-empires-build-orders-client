@@ -6,6 +6,7 @@ export const civilizationEnums = [
   "FRENCH",
   "HOLY_ROMAN_EMPIRE",
   "MALIANS",
+  "MONGOLS",
   "OTTOMANS",
   "RUS",
 ] as const;
