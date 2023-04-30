@@ -14,7 +14,7 @@ function Build({ build }: Props) {
     // <GridItem>
     <Box mt="80px">
       <Stack spacing={2}>
-        {/* <BuildCard
+        <BuildCard
           title={build.title}
           description={build.description}
           civilization={build.civilization}
@@ -22,8 +22,7 @@ function Build({ build }: Props) {
           mapType={build.mapType}
           buildType={build.buildType}
           createdBy={build.createdBy}
-        /> */}
-        <Typography>{build.id}</Typography>
+        />
         <Box component={Paper} elevation={8} p={5} sx={{borderRadius: ".2rem"}}>
           <Steps steps={build.steps} isPreview={false}/>
         </Box>

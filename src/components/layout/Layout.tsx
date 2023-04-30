@@ -15,8 +15,12 @@ function Layout({}: Props) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  function toggleNav() {
-    setIsOpen((prevState) => !prevState);
+  function openNav() {
+    setIsOpen(true);
+  }
+
+  function closeNav() {
+    setIsOpen(false);
   }
 
   function handleLogout() {
@@ -29,12 +33,12 @@ function Layout({}: Props) {
     <>
       <Navigation
         token={token}
-        toggleNav={toggleNav}
+        onOpen={openNav}
         handleLogout={handleLogout}
       />
       <MobileNav
         token={token}
-        toggleNav={toggleNav}
+        onClose={closeNav}
         isOpen={isOpen}
         handleLogout={handleLogout}
       />

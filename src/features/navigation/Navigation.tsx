@@ -7,17 +7,17 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { logoutUser } from "../../store/slices/authSlice";
-import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
 import NavButton from "../../components/nav/NavButton";
 
 type Props = {
   token: string;
-  toggleNav: () => void;
+  onOpen: () => void;
   handleLogout: () => void;
 };
 
-function Navigation({ token, toggleNav, handleLogout }: Props) {
+function Navigation({ token, onOpen, handleLogout }: Props) {
   const username = useAppSelector((state) => state.auth.username);
   return (
     <Box sx={{ display: "flex" }}>
@@ -28,9 +28,9 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
           </Typography>
           <Icon
             sx={{ display: { xs: "block", md: "none" } }}
-            onClick={toggleNav}
+            onClick={onOpen}
           >
-            <HiOutlineMenuAlt3 fontSize="1.5rem" color="#e9c56a" />
+            <RxHamburgerMenu fontSize="1.5rem" color="#e9c56a" />
           </Icon>
 
           <Box

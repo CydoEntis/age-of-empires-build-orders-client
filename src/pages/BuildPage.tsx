@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
 import Build from "../features/builds/Build";
 import { getBuildById } from "../store/slices/buildSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 type Props = {};
 
 function BuildPage({}: Props) {
@@ -30,7 +30,11 @@ function BuildPage({}: Props) {
   }, []);
   return (
     <BaseContainer>
-        {build && <Build build={build} />}
+      {build && (
+        <Link style={{ textDecoration: "none" }} to={`/builds/${build.id}`}>
+          <Build build={build} />
+        </Link>
+      )}
     </BaseContainer>
   );
 }

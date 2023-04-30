@@ -67,7 +67,6 @@ function BuildCard({
       break;
   }
   return (
-    <Link style={{ textDecoration: "none" }} to={`/builds/${id}`}>
       <Card
         elevation={8}
         component={Paper}
@@ -132,7 +131,6 @@ function BuildCard({
           </CardContent>
         </Box>
       </Card>
-    </Link>
   );
 }
 

@@ -13,7 +13,7 @@ type Props = {
   stone: number;
   step: string;
   isPreview?: boolean;
-  deleteStep: (id: number) => void;
+  deleteStep?: (id: number) => void;
 };
 
 function StepTableRow({
@@ -25,7 +25,7 @@ function StepTableRow({
   stone,
   step,
   isPreview,
-  deleteStep
+  deleteStep,
 }: Props) {
   return (
     <TableRow
@@ -38,10 +38,16 @@ function StepTableRow({
       <StepTableCell item={wood} type={"wood"} align="center" />
       <StepTableCell item={gold} type={"gold"} align="center" />
       <StepTableCell item={stone} type={"stone"} align="center" />
-      <StepTableCell item={step}  />
+      <StepTableCell item={step} />
       {isPreview && (
         <TableCell align="right">
-            <BsFillTrashFill onClick={() => deleteStep(id)} fontSize="1.5rem" color="#ff6161"/>
+          {deleteStep && (
+            <BsFillTrashFill
+              onClick={() => deleteStep(id)}
+              fontSize="1.5rem"
+              color="#ff6161"
+            />
+          )}
         </TableCell>
       )}
     </TableRow>

@@ -6,7 +6,7 @@ import { Step } from "../../store/slices/buildSlice";
 
 type Props = {
   steps: Step[];
-  deleteStep: (id: number) => void;
+  deleteStep?: (id: number) => void;
   isPreview?: boolean;
 };
 
