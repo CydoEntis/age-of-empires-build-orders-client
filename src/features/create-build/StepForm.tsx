@@ -21,7 +21,6 @@ type Props = {
   addStep: (data: Step) => void;
 };
 
-
 const defaultStepValues: Step = {
   villagers: 0,
   step: "",
@@ -63,55 +62,66 @@ function StepForm({ addStep }: Props) {
         Add A Step
       </Typography>
       <Stack direction={{ xs: "column", sm: "row" }} gap={5}>
+        <Box sx={{ width: "400px" }}>
+          <FormInput
+            id="villagers"
+            name="villagers"
+            label="Villagers"
+            control={control}
+            type="number"
+            variant="filled"
+          />
+        </Box>
+        <Box sx={{ width: "400px" }}>
+          <FormInput
+            id="food"
+            name="food"
+            label="Food"
+            control={control}
+            type="number"
+            variant="filled"
+          />
+        </Box>
+        <Box sx={{ width: "400px" }}>
+          <FormInput
+            id="wood"
+            name="wood"
+            label="Wood"
+            control={control}
+            type="number"
+            variant="filled"
+          />
+        </Box>
+        <Box sx={{ width: "400px" }}>
+          <FormInput
+            id="gold"
+            name="gold"
+            label="Gold"
+            control={control}
+            type="number"
+            variant="filled"
+          />
+        </Box>
+        <Box sx={{ width: "400px" }}>
+          <FormInput
+            id="stone"
+            name="stone"
+            label="Stone"
+            control={control}
+            type="number"
+            variant="filled"
+          />
+        </Box>
         <FormInput
-          id="villagers"
-          name="villagers"
-          label="Villagers"
+          id="step"
+          name="step"
+          label="Step"
           control={control}
-          type="number"
-          variant="standard"
-        />
-        <FormInput
-          id="food"
-          name="food"
-          label="Food"
-          control={control}
-          type="number"
-          variant="standard"
-        />
-        <FormInput
-          id="wood"
-          name="wood"
-          label="Wood"
-          control={control}
-          type="number"
-          variant="standard"
-        />
-        <FormInput
-          id="gold"
-          name="gold"
-          label="Gold"
-          control={control}
-          type="number"
-          variant="standard"
-        />
-        <FormInput
-          id="stone"
-          name="stone"
-          label="Stone"
-          control={control}
-          type="number"
-          variant="standard"
+          type="text"
+          variant="filled"
         />
       </Stack>
-      <FormInput
-        id="step"
-        name="step"
-        label="Step"
-        control={control}
-        type="text"
-        variant="standard"
-      />
+
       <Button
         type="submit"
         variant="contained"

@@ -5,6 +5,9 @@ import {
   Button,
   Grid,
   Paper,
+  Tabs,
+  Tab,
+  Box,
 } from "@mui/material";
 import { ZodType, z } from "zod";
 import {
@@ -39,6 +42,8 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import FormTextArea from "../../components/form/FormTextArea";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import StepsNotFound from "../../components/not-found/StepsNotFound";
+import TabController from "../../components/tabs/TabController";
+import TabPanel from "../../components/tabs/TabPanel";
 
 type Props = {
   build?: BuildWithSteps;
@@ -50,6 +55,12 @@ function BuildForm({ build, edit }: Props) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { buildId } = useParams();
+
+  const [value, setValue] = useState(0);
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
   const [steps, setSteps] = useState<Step[]>(edit ? build!.steps : []);
   let defaultBuildValues: Build;
@@ -133,106 +144,114 @@ function BuildForm({ build, edit }: Props) {
         xs={12}
         sm={12}
         md={12}
-        lg={5}
-        xl={5}
-        py={5}
-        px={2}
+        lg={12}
+        xl={12}
+        p={3}
         sx={{ borderRadius: ".4rem" }}
       >
-        <Typography variant="h3">Create A New Build</Typography>
+        <Typography variant="h3">
+          {value === 0 && "Create A New Build"}
+        </Typography>
+        <Typography variant="h3">{value === 1 && "Add A Step"}</Typography>
+        <TabController value={value} onChange={handleTabChange}>
+          <TabPanel value={value} index={0}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <FormInput
+                id="title"
+                name="title"
+                label="Build Name"
+                control={control}
+                type="text"
+                variant="filled"
+              />
+              <FormTextArea
+                name="description"
+                label="Description"
+                control={control}
+                variant="filled"
+              />
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <FormInput
-            id="title"
-            name="title"
-            label="Build Name"
-            control={control}
-            type="text"
-            variant="filled"
-          />
-          <FormTextArea
-            name="description"
-            label="Description"
-            control={control}
-            variant="filled"
-          />
+              <Stack
+                direction={{ sm: "column", md: "column", lg: "row" }}
+                spacing={6}
+                gap={2}
+                alignItems="center"
+                justifyContent="center"
+                py={3}
+              >
+                <FromDropdown
+                  name="civilization"
+                  control={control}
+                  label="Select a Civilization"
+                  options={civilizations}
+                />
+                <FromDropdown
+                  name="difficulty"
+                  control={control}
+                  label="Select a Difficulty"
+                  options={difficulties}
+                />
+              </Stack>
+              <Stack
+                direction={{ sm: "column", md: "column", lg: "row" }}
+                spacing={6}
+                gap={2}
+                alignItems="center"
+                justifyContent="center"
+                py={3}
+              >
+                <FromDropdown
+                  name="mapType"
+                  control={control}
+                  label="Select a Map Type"
+                  options={mapTypes}
+                />
+                <FromDropdown
+                  name="buildType"
+                  control={control}
+                  label="Select a Build Type"
+                  options={buildTypes}
+                />
+              </Stack>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  justifyContent: "flex-start",
+                  alignItems: "flex-start",
+                  display: "block",
+                  mt: 1,
+                  mb: 1,
+                }}
+              >
+                {edit ? "Update Build" : "Create Build"}
+              </Button>
+            </form>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <StepForm addStep={addStep} />
 
-          <Stack
-            direction={{ sm: "column", md: "column", lg: "row" }}
-            spacing={6}
-            gap={2}
-            alignItems="center"
-            justifyContent="center"
-            py={3}
-          >
-            <FromDropdown
-              name="civilization"
-              control={control}
-              label="Select a Civilization"
-              options={civilizations}
-            />
-            <FromDropdown
-              name="difficulty"
-              control={control}
-              label="Select a Difficulty"
-              options={difficulties}
-            />
-          </Stack>
-          <Stack
-            direction={{ sm: "column", md: "column", lg: "row" }}
-            spacing={6}
-            gap={2}
-            alignItems="center"
-            justifyContent="center"
-            py={3}
-          >
-            <FromDropdown
-              name="mapType"
-              control={control}
-              label="Select a Map Type"
-              options={mapTypes}
-            />
-            <FromDropdown
-              name="buildType"
-              control={control}
-              label="Select a Build Type"
-              options={buildTypes}
-            />
-          </Stack>
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{
-              justifyContent: "flex-start",
-              alignItems: "flex-start",
-              display: "block",
-              mt: 1,
-              mb: 1,
-            }}
-          >
-            {edit ? "Update Build" : "Create Build"}
-          </Button>
-        </form>
-        <StepForm addStep={addStep} />
-      </Grid>
-      <Grid
-        // m={2}
-        component={Paper}
-        elevation={8}
-        item
-        xs={12}
-        sm={12}
-        md={12}
-        lg={6}
-        xl={6}
-        py={5}
-        px={2}
-        sx={{ borderRadius: ".4rem" }}
-      >
-        {steps.length <= 0 && <StepsNotFound />}
-        {steps.length > 0 && (
-          <Steps steps={steps} deleteStep={removeStep} isPreview />
-        )}
+            {/* <Grid
+              // m={2}
+              component={Paper}
+              elevation={8}
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={6}
+              xl={6}
+              py={5}
+              px={2}
+              sx={{ borderRadius: ".4rem" }}
+            > */}
+              {steps.length > 0 && (
+                <Steps steps={steps} deleteStep={removeStep} isPreview />
+              )}
+              {steps.length <= 0 && <StepsNotFound />}
+            {/* </Grid> */}
+          </TabPanel>
+        </TabController>
       </Grid>
     </Grid>
   );

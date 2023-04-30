@@ -4,6 +4,7 @@ import {
   Stack,
   Box,
   Paper,
+  Button,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import AbbasidFlag from "../../assets/abbasid.png";
@@ -18,7 +19,7 @@ import OttomanFlag from "../../assets/ottoman.png";
 import RusFlag from "../../assets/rus.png";
 import { Build } from "../../store/slices/buildSlice";
 import Tag from "../tag/Tag";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function BuildCard({
   id,
@@ -65,15 +66,19 @@ function BuildCard({
     default:
       break;
   }
-
   return (
-    <Link style={{textDecoration: "none"}} to={`/builds/${id}`}>
+    <Link style={{ textDecoration: "none" }} to={`/builds/${id}`}>
       <Card
         elevation={8}
         component={Paper}
-        sx={{ display: "flex", flexDirection: {xs: "column", sm: "row" }, borderRadius: ".2rem", marginBotton: "6px" }}
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          borderRadius: ".2rem",
+          marginBotton: "6px",
+        }}
       >
-        <Box sx={{ width: {xs: "100%", sm: "300px" }, position: "relative" }}>
+        <Box sx={{ width: { xs: "100%", sm: "300px" }, position: "relative" }}>
           <Box
             className="img-overlay"
             sx={{
@@ -99,22 +104,31 @@ function BuildCard({
           }}
         >
           <CardContent>
-            <Typography variant="h5" >
-              {title}
-            </Typography>
-            {
-              description && (
-                <Typography variant="subtitle1"  mb={2}>
+            <Typography variant="h5">{title}</Typography>
+            {description && (
+              <Typography variant="subtitle1" mb={2}>
                 {description}
               </Typography>
-              )
-            }
-            <Stack direction="row" flexWrap="wrap"  >
+            )}
+            <Stack direction="row" flexWrap="wrap">
               <Tag text={createdBy} />
               <Tag text={difficulty} />
               <Tag text={mapType} />
               <Tag text={buildType} />
             </Stack>
+            <Box>
+              <Button
+                variant="contained"
+                component={NavLink}
+                to={`/builds/edit/${id}`}
+                sx={{ marginRight: 2, marginTop: 1 }}
+              >
+                Edit
+              </Button>
+              <Button variant="contained" sx={{ marginRight: 2, marginTop: 1, backgroundColor: "rgb(255, 97, 97)" }}>
+                Delete
+              </Button>
+            </Box>
           </CardContent>
         </Box>
       </Card>

@@ -28,7 +28,6 @@ function BuildPage({}: Props) {
   useEffect(() => {
     dispatch(getBuildById(Number(buildId!)));
   }, []);
-  console.log(build);
   return (
     <BaseContainer>
         {build && <Build build={build} />}
