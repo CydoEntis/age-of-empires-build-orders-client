@@ -5,7 +5,7 @@ import { alignProperty } from "@mui/material/styles/cssUtils";
 import { BsFillTrashFill } from "react-icons/bs";
 
 type Props = {
-  id: number | string;
+  id: number;
   villagers: number;
   food: number;
   wood: number;
@@ -13,7 +13,7 @@ type Props = {
   stone: number;
   step: string;
   isPreview?: boolean;
-  deleteStep?: (id: number | string) => void;
+  deleteStep: (id: number) => void;
 };
 
 function StepTableRow({

@@ -104,14 +104,12 @@ function BuildForm({ build, edit }: Props) {
     setSteps((prevSteps) => [...prevSteps, data]);
   }
 
-  function removeStep(id: number | string) {
+  function removeStep(id: number) {
+    const updatedSteps = steps.filter((step) => step.id !== id);
+    setSteps(updatedSteps);
+    
     if (edit) {
       dispatch(deleteStep(id));
-      const updatedSteps = steps.filter((step) => step.id !== id);
-      setSteps(updatedSteps);
-    } else {
-      const updatedSteps = steps.filter((step) => step.id !== id);
-      setSteps(updatedSteps);
     }
   }
 

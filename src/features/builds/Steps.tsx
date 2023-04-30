@@ -6,7 +6,7 @@ import { Step } from "../../store/slices/buildSlice";
 
 type Props = {
   steps: Step[];
-  deleteStep?: (id: number | string) => void;
+  deleteStep: (id: number) => void;
   isPreview?: boolean;
 };
 
@@ -16,10 +16,10 @@ function Steps({ isPreview, steps, deleteStep }: Props) {
       <Table>
         <StepTableHead isPreview={isPreview} />
         <StepTableBody>
-          {steps.map((step, index) => (
+          {steps.map((step) => (
             <StepTableRow
-              id={step.id ? step.id : index}
-              key={step.id ? step.id : index}
+              id={step.id}
+              key={step.id}
               villagers={step.villagers}
               food={step.food}
               wood={step.wood}

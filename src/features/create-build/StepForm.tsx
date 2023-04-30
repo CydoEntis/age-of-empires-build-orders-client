@@ -1,11 +1,7 @@
 import {
   Box,
   Button,
-  Grid,
-  Paper,
   Stack,
-  TextField,
-  Typography,
 } from "@mui/material";
 import { MobileTimePicker } from "@mui/x-date-pickers";
 import React, { useState } from "react";
@@ -14,8 +10,7 @@ import { Step } from "../../store/slices/buildSlice";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import FormInput from "../../components/form/FormInput";
-import GridItem from "../../components/grid/GridItem";
-import { v4 as uuidv4 } from "uuid";
+
 
 type Props = {
   addStep: (data: Step) => void;
@@ -24,6 +19,7 @@ type Props = {
 let tempId = 0;
 
 const defaultStepValues: Step = {
+  id: tempId,
   villagers: 0,
   step: "",
   food: 0,
@@ -34,6 +30,7 @@ const defaultStepValues: Step = {
 
 function StepForm({ addStep }: Props) {
   const stepSchema: ZodType<Step> = z.object({
+    id: z.number().nonnegative(),
     villagers: z.number().min(0).max(200).nonnegative(),
     step: z
       .string()
