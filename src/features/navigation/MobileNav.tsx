@@ -1,7 +1,9 @@
 import { Box, Drawer, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { SlClose } from "react-icons/sl";
+import NavButton from "../../components/nav/NavButton";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 type Props = {
   token: string;
@@ -15,6 +17,7 @@ type Props = {
 // TODO: Add pagination
 // TODO: Add refresh tokens
 function MobileNav({ token, toggleNav, isOpen, handleLogout }: Props) {
+  const username = useAppSelector((state) => state.auth.username);
   return (
     <Drawer anchor="right" open={isOpen}>
       <Box sx={{ width: 250 }} role="presentation">
@@ -29,7 +32,7 @@ function MobileNav({ token, toggleNav, isOpen, handleLogout }: Props) {
             <Typography variant="h5" my={5}>
               Build Buddy
             </Typography>
-            <Button
+            {/* <Button
               component={NavLink}
               to="/"
               onClick={toggleNav}
@@ -70,14 +73,54 @@ function MobileNav({ token, toggleNav, isOpen, handleLogout }: Props) {
                   Register
                 </Button>
               </Stack>
+            )} */}
+            <Box mb={4}>
+              <NavButton onClick={toggleNav} to={"/"} text="builds" />
+            </Box>
+            {token && (
+              <>
+                <Box mb={4}>
+                  <NavButton
+                    onClick={toggleNav}
+                    to={"/builds/create"}
+                    text="create a build"
+                  />
+                </Box>
+                <Box mb={4}>
+                  <NavButton
+                    onClick={toggleNav}
+                    to={`/builds/?username=${username}`}
+                    text="my builds"
+                  />
+                </Box>
+                <Box mb={4}>
+                  <Button onClick={handleLogout}>Logout</Button>
+                </Box>
+              </>
             )}
-          </Box>
-          <Box textAlign="center" sx={{ display: { xs: "block", sm: "none" } }}>
-            <AiFillCloseCircle
-              fontSize="2rem"
-              color="#e9c56a"
-              onClick={toggleNav}
-            />
+            {!token && (
+              <>
+                <Box mb={4}>
+                  <Button component={NavLink} to="/login" variant="contained">
+                    Login
+                  </Button>
+                  <NavButton onClick={toggleNav} to="/login" text="login" />
+                </Box>
+                <Box mb={4}>
+                  <NavButton
+                    onClick={toggleNav}
+                    to="/register"
+                    text="register"
+                  />
+                </Box>
+              </>
+            )}
+            <Box
+              textAlign="center"
+              sx={{ display: { xs: "block", sm: "none" } }}
+            >
+              <SlClose onClick={toggleNav} className="icon" />
+            </Box>
           </Box>
         </Stack>
       </Box>

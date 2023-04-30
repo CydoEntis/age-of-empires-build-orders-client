@@ -1,4 +1,4 @@
-import { Icon, Paper } from "@mui/material";
+import { Icon, Link, Paper } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { logoutUser } from "../../store/slices/authSlice";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { NavLink } from "react-router-dom";
+import NavButton from "../../components/nav/NavButton";
 
 type Props = {
   token: string;
@@ -17,7 +18,7 @@ type Props = {
 };
 
 function Navigation({ token, toggleNav, handleLogout }: Props) {
-  const username = useAppSelector(state => state.auth.username);
+  const username = useAppSelector((state) => state.auth.username);
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar color="secondary">
@@ -32,27 +33,24 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
             <HiOutlineMenuAlt3 fontSize="1.5rem" color="#e9c56a" />
           </Icon>
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-            <Button
-              sx={{
-                "&:active": {
-                  color: "purple",
-                  background: "orange",
-                },
-              }}
-              component={NavLink}
-              to="/"
-            >
-              Builds
-            </Button>
+          <Box
+            sx={{
+              display: { xs: "none", sm: "inline-block" },
+            }}
+            mx={1}
+          >
+            <NavButton to={"/"} text="builds" />
           </Box>
           {token && (
             <>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-                <Button component={NavLink} to="/builds/create">Create A Build</Button>
+                <NavButton to={"/builds/create"} text="create a build" />
               </Box>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-                <Button component={NavLink} to={`/builds/?username=${username}`} >My Builds</Button>
+                <NavButton
+                  to={`/builds/?username=${username}`}
+                  text="my builds"
+                />
               </Box>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
                 <Button onClick={handleLogout}>Logout</Button>
@@ -65,11 +63,13 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
                 <Button component={NavLink} to="/login" variant="contained">
                   Login
                 </Button>
+                <NavButton to="/login" text="login" />
               </Box>
               <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
-                <Button href="/register" variant="outlined">
-                  Register
-                </Button>
+                <NavButton
+                  to="/register"
+                  text="register"
+                />
               </Box>
             </>
           )}

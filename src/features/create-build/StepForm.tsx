@@ -21,6 +21,8 @@ type Props = {
   addStep: (data: Step) => void;
 };
 
+let tempiId = 0;
+
 const defaultStepValues: Step = {
   villagers: 0,
   step: "",
@@ -51,7 +53,7 @@ function StepForm({ addStep }: Props) {
   function submitForm(data: Step) {
     addStep({
       ...data,
-      id: Math.floor(Math.random() * (10000 - 1 + 1) + 10000),
+      id: tempId++,
     });
     reset();
   }
