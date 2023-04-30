@@ -25,7 +25,7 @@ function TabController({value, onChange, children}: Props) {
             aria-controls={`tab-control-${0}`}
           />
           <Tab
-            label="Steps"
+            label="Add Steps"
             id={`tab-control-${1}`}
             aria-controls={`tab-control-${1}`}
           />

@@ -21,7 +21,7 @@ type Props = {
   addStep: (data: Step) => void;
 };
 
-let tempiId = 0;
+let tempId = 0;
 
 const defaultStepValues: Step = {
   villagers: 0,
@@ -60,11 +60,9 @@ function StepForm({ addStep }: Props) {
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <Typography variant="h6" mt={3}>
-        Add A Step
-      </Typography>
-      <Stack direction={{ xs: "column", sm: "row" }} gap={5}>
-        <Box sx={{ width: "400px" }}>
+
+      <Stack direction={{ xs: "column", sm: "row" }} gap={1}>
+        <Box sx={{ width: { lg: "400px " } }}>
           <FormInput
             id="villagers"
             name="villagers"
@@ -74,7 +72,7 @@ function StepForm({ addStep }: Props) {
             variant="filled"
           />
         </Box>
-        <Box sx={{ width: "400px" }}>
+        <Box sx={{ width: { lg: "400px " } }}>
           <FormInput
             id="food"
             name="food"
@@ -84,7 +82,7 @@ function StepForm({ addStep }: Props) {
             variant="filled"
           />
         </Box>
-        <Box sx={{ width: "400px" }}>
+        <Box sx={{ width: { lg: "400px " } }}>
           <FormInput
             id="wood"
             name="wood"
@@ -94,7 +92,7 @@ function StepForm({ addStep }: Props) {
             variant="filled"
           />
         </Box>
-        <Box sx={{ width: "400px" }}>
+        <Box sx={{ width: { lg: "400px " } }}>
           <FormInput
             id="gold"
             name="gold"
@@ -104,7 +102,7 @@ function StepForm({ addStep }: Props) {
             variant="filled"
           />
         </Box>
-        <Box sx={{ width: "400px" }}>
+        <Box sx={{ width: { lg: "400px " } }}>
           <FormInput
             id="stone"
             name="stone"

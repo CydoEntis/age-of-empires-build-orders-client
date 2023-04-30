@@ -147,12 +147,10 @@ function BuildForm({ build, edit }: Props) {
         lg={12}
         xl={12}
         p={3}
-        sx={{ borderRadius: ".4rem" }}
+        sx={{
+          borderRadius: { xs: 0, sm: ".4rem" },
+        }}
       >
-        <Typography variant="h3">
-          {value === 0 && "Create A New Build"}
-        </Typography>
-        <Typography variant="h3">{value === 1 && "Add A Step"}</Typography>
         <TabController value={value} onChange={handleTabChange}>
           <TabPanel value={value} index={0}>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -231,25 +229,10 @@ function BuildForm({ build, edit }: Props) {
           <TabPanel value={value} index={1}>
             <StepForm addStep={addStep} />
 
-            {/* <Grid
-              // m={2}
-              component={Paper}
-              elevation={8}
-              item
-              xs={12}
-              sm={12}
-              md={12}
-              lg={6}
-              xl={6}
-              py={5}
-              px={2}
-              sx={{ borderRadius: ".4rem" }}
-            > */}
-              {steps.length > 0 && (
-                <Steps steps={steps} deleteStep={removeStep} isPreview />
-              )}
-              {steps.length <= 0 && <StepsNotFound />}
-            {/* </Grid> */}
+            {steps.length > 0 && (
+              <Steps steps={steps} deleteStep={removeStep} isPreview />
+            )}
+            {steps.length <= 0 && <StepsNotFound />}
           </TabPanel>
         </TabController>
       </Grid>

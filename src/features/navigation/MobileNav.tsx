@@ -117,7 +117,7 @@ function MobileNav({ token, toggleNav, isOpen, handleLogout }: Props) {
             )}
             <Box
               textAlign="center"
-              sx={{ display: { xs: "block", sm: "none" } }}
+              sx={{ display: { xs: "block", lg: "none" } }}
             >
               <SlClose onClick={toggleNav} className="icon" />
             </Box>

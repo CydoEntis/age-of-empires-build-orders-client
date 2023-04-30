@@ -27,7 +27,7 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
             BuildBuddy
           </Typography>
           <Icon
-            sx={{ display: { xs: "block", sm: "none" } }}
+            sx={{ display: { xs: "block", md: "none" } }}
             onClick={toggleNav}
           >
             <HiOutlineMenuAlt3 fontSize="1.5rem" color="#e9c56a" />
@@ -35,7 +35,7 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
 
           <Box
             sx={{
-              display: { xs: "none", sm: "inline-block" },
+              display: { xs: "none", md: "inline-block" },
             }}
             mx={1}
           >
@@ -43,29 +43,29 @@ function Navigation({ token, toggleNav, handleLogout }: Props) {
           </Box>
           {token && (
             <>
-              <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
+              <Box sx={{ display: { xs: "none", md: "block" } }} mx={1}>
                 <NavButton to={"/builds/create"} text="create a build" />
               </Box>
-              <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
+              <Box sx={{ display: { xs: "none", md: "block" } }} mx={1}>
                 <NavButton
                   to={`/builds/?username=${username}`}
                   text="my builds"
                 />
               </Box>
-              <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
+              <Box sx={{ display: { xs: "none", md: "block" } }} mx={1}>
                 <Button onClick={handleLogout}>Logout</Button>
               </Box>
             </>
           )}
           {!token && (
             <>
-              <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
+              <Box sx={{ display: { xs: "none", md: "block" } }} mx={1}>
                 <Button component={NavLink} to="/login" variant="contained">
                   Login
                 </Button>
                 <NavButton to="/login" text="login" />
               </Box>
-              <Box sx={{ display: { xs: "none", sm: "block" } }} mx={1}>
+              <Box sx={{ display: { xs: "none", md: "block" } }} mx={1}>
                 <NavButton
                   to="/register"
                   text="register"

@@ -41,7 +41,7 @@ function StepTableRow({
       <StepTableCell item={step}  />
       {isPreview && (
         <TableCell align="right">
-            <BsFillTrashFill onClick={() => deleteStep(id!)} fontSize="1.5rem" color="#ff6161"/>
+            <BsFillTrashFill onClick={() => deleteStep(id)} fontSize="1.5rem" color="#ff6161"/>
         </TableCell>
       )}
     </TableRow>

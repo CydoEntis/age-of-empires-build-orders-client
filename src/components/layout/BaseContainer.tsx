@@ -7,7 +7,7 @@ function BaseContainer({ children }: Props) {
   return (
     <Box
       width={{ xs: "100%", sm: "95%", md: "95%", lg: "95%", xl: "65%" }}
-      sx={{ margin: "120px auto" }}
+      sx={{ margin: "80px auto" }}
     >
       {children}
     </Box>
