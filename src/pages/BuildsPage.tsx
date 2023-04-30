@@ -15,7 +15,6 @@ function BuildsPage({}: Props) {
   useEffect(() => {
     dispatch(getAllBuilds());
   }, []);
-  console.log(builds);
   return (
     <BaseContainer>
       <Grid container sx={{ margin: "0 auto" }}>

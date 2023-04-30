@@ -73,8 +73,7 @@ function BuildForm({ build, edit }: Props) {
       mapType: build!.mapType,
       buildType: build!.buildType,
     };
-    // console.log(build!.steps);
-    // setSteps(build!.steps);
+
   } else {
     defaultBuildValues = {
       title: "",
@@ -107,7 +106,7 @@ function BuildForm({ build, edit }: Props) {
   function removeStep(id: number) {
     const updatedSteps = steps.filter((step) => step.id !== id);
     setSteps(updatedSteps);
-    
+
     if (edit) {
       dispatch(deleteStep(id));
     }
@@ -122,7 +121,6 @@ function BuildForm({ build, edit }: Props) {
     };
     if (edit) {
       build.id = Number(buildId);
-      console.log(build);
       dispatch(editBuild(build));
     } else {
       dispatch(createBuild(build));

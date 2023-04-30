@@ -46,7 +46,6 @@ export const registerUser = createAsyncThunk(
   async (registerDetails: RegisterDetails) => {
     try {
 
-      console.log(registerDetails);
       const res = await axios.post(
         `${apiEndpoint}/auth/register`,
         registerDetails
@@ -65,9 +64,6 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (loginDetails: LoginDetails) => {
     try {
-      // let config = await getCsrfTokenConfig();
-      // console.log(config);
-      console.log(apiEndpoint + "/auth/login");
       const res = await axios.post(
         `${apiEndpoint}/auth/login`,
         loginDetails,

@@ -93,7 +93,6 @@ export const getMyBuilds = createAsyncThunk(
   "/builds/user",
   async (username: string) => {
     let config = setHeaders();
-    console.log(`${apiEndpoint}/builds/${username}`);
     try {
       const res = await axios.get(`${apiEndpoint}/builds`, {
         params: {
@@ -112,7 +111,6 @@ export const createBuild = createAsyncThunk(
   "/builds/create",
   async (build: BuildWithSteps) => {
     let config = setHeaders();
-    console.log(build);
     try {
       const res = await axios.post(
         `${apiEndpoint}/builds/create`,
@@ -130,7 +128,6 @@ export const deleteStep = createAsyncThunk(
   "/builds/delete",
   async (id: number | string ) => {
     let config = setHeaders();
-    console.log(id);
     try {
       const res = await axios.delete(`${apiEndpoint}/steps/delete/${id}`, config);
       return res.data;
@@ -143,7 +140,6 @@ export const deleteStep = createAsyncThunk(
 export const editBuild = createAsyncThunk(
   "/builds/edit",
   async (build: BuildWithSteps) => {
-    console.log(build);
     let config = setHeaders();
     try {
       const res = await axios.put(
